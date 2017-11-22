@@ -1,0 +1,13 @@
+[{
+    "ParameterKey": "kinesisStream",
+    "ParameterValue": "test-ks"
+}, {
+    "ParameterKey": "ESDomain",
+    "ParameterValue": "evaluate"
+}, {
+    "ParameterKey": "cidrBlock",
+    "ParameterValue": ""
+}, {
+    "ParameterKey": "S3Bucket",
+    "ParameterValue": "connect-befb471d7720"
+}]
