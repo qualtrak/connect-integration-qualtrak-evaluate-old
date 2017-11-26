@@ -76,10 +76,4 @@
 }, {
     "ParameterKey": "QSS3KeyPrefix",
     "ParameterValue": "connect/integration/datastreaming/latest/"
-},{
-    "ParameterKey": "EQSS3BucketName",
-    "ParameterValue": "Qualtrak"
-}, {
-    "ParameterKey": "EQSS3KeyPrefix",
-    "ParameterValue": "e4ac/"
 }]

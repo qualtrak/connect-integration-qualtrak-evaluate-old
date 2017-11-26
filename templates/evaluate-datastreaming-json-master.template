@@ -438,12 +438,6 @@
             "Description" : "The name of a new bucket that will be used to store Attachments. The actual name will become evaluate-<AccountId>-<whatever-you-enter-here>, e.g. evaluate-344201342714-myNewBucket",
             "AllowedPattern" : "^[0-9a-zA-Z]+([0-9a-zA-Z-]*[0-9a-zA-Z])*$",
             "ConstraintDescription" : "The bucket name can include numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen (-) "
-        }, 
-        "EQSS3BucketName": {            
-            "Type": "String"            
-        },
-        "EQSS3KeyPrefix": {          
-            "Type": "String"
         }
     },
     "Rules": {
@@ -525,7 +519,7 @@
             "Type": "AWS::CloudFormation::Stack",
             "Properties": {
                 "TemplateURL": {
-                    "Fn::Sub": "https://s3.amazonaws.com/${EQSS3BucketName}/${EQSS3KeyPrefix}templates/evaluate-json.template"
+                    "Fn::Sub": "https://qualtrak-${QSS3BucketName}.s3.amazonaws.com/connect/integration/qualtrak/latest/templates/evaluate-json.template"
                 },
                 "Parameters": {                    
                     "KeyName": {
@@ -586,10 +580,10 @@
                         "Fn::GetAtt": "DataStreamingStack.Outputs.KinesisStream"
                     },
                     "QSS3BucketName": {
-                        "Ref": "EQSS3BucketName"
+                        "Ref": "QSS3BucketName"
                     },
                     "QSS3KeyPrefix": {
-                        "Ref": "EQSS3KeyPrefix"
+                        "Ref": "QSS3KeyPrefix"
                     }                  
                 }
             }
