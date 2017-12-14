@@ -300,7 +300,7 @@
         }
     },
     "Resources" : {
-        "sqlExpress" : {
+        "SqlExpress" : {
             "Type" : "AWS::RDS::DBInstance",
             "DeletionPolicy" : "Snapshot",
             "Properties" : {
@@ -331,7 +331,7 @@
                 "BackupRetentionPeriod" : "0"
             }
         },
-        "rootRole" : {
+        "RootRole" : {
             "Type" : "AWS::IAM::Role",
             "Properties" : {
                 "AssumeRolePolicyDocument" : {
@@ -483,18 +483,18 @@
                 ]
             }
         },
-        "rootInstanceProfile" : {
+        "RootInstanceProfile" : {
             "Type" : "AWS::IAM::InstanceProfile",
             "Properties" : {
                 "Path" : "/",
                 "Roles" : [
                     {
-                        "Ref" : "rootRole"
+                        "Ref" : "RootRole"
                     }
                 ]
             }
         },
-        "windowsServer" : {
+        "WindowsServer" : {
             "Type" : "AWS::EC2::Instance",
             "Metadata" : {
                 "AWS::CloudFormation::Init" : {
@@ -527,12 +527,12 @@
                                         [
                                             "[cfn-auto-reloader-hook]\n",
                                             "triggers=post.update\n",
-                                            "path=Resources.windowsServer.Metadata.AWS::CloudFormation::Init\n",
+                                            "path=Resources.WindowsServer.Metadata.AWS::CloudFormation::Init\n",
                                             "action=cfn-init.exe -v -s ",
                                             {
                                                 "Ref" : "AWS::StackName"
                                             },
-                                            " -r windowsServer",
+                                            " -r WindowsServer",
                                             " --region ",
                                             {
                                                 "Ref" : "AWS::Region"
@@ -594,7 +594,7 @@
                                             "[Environment]::SetEnvironmentVariable(\"q-db-dns\", \"",
                                             {
                                                 "Fn::GetAtt" : [
-                                                    "sqlExpress",
+                                                    "SqlExpress",
                                                     "Endpoint.Address"
                                                 ]
                                             },
@@ -603,7 +603,7 @@
                                             "[Environment]::SetEnvironmentVariable(\"q-db-port\", \"",
                                             {
                                                 "Fn::GetAtt" : [
-                                                    "sqlExpress",
+                                                    "SqlExpress",
                                                     "Endpoint.Port"
                                                 ]
                                             },
@@ -791,7 +791,7 @@
                                             {
                                                 "Ref" : "AWS::StackName"
                                             },
-                                            " --resource windowsServer --region ",
+                                            " --resource WindowsServer --region ",
                                             {
                                                 "Ref" : "AWS::Region"
                                             }
@@ -817,7 +817,7 @@
             },
             "Properties" : {
                 "IamInstanceProfile" : {
-                    "Ref" : "rootInstanceProfile"
+                    "Ref" : "RootInstanceProfile"
                 },
                 "Tags" : [
                     {
@@ -858,7 +858,7 @@
                                 {
                                     "Ref" : "AWS::StackName"
                                 },
-                                " -r windowsServer ",
+                                " -r WindowsServer ",
                                 " --region ",
                                 {
                                     "Ref" : "AWS::Region"
@@ -964,7 +964,7 @@
             "Description" : "Private Ip Address",
             "Value" : {
                 "Fn::GetAtt" : [
-                    "windowsServer",
+                    "WindowsServer",
                     "PrivateIp"
                 ]
             }
@@ -973,7 +973,7 @@
             "Description" : "Public Ip Address",
             "Value" : {
                 "Fn::GetAtt" : [
-                    "windowsServer",
+                    "WindowsServer",
                     "PublicIp"
                 ]
             }
@@ -986,7 +986,7 @@
                     [
                         {
                             "Fn::GetAtt" : [
-                                "windowsServer",
+                                "WindowsServer",
                                 "PublicDnsName"
                             ]
                         },
@@ -1003,7 +1003,7 @@
                     [
                         {
                             "Fn::GetAtt" : [
-                                "windowsServer",
+                                "WindowsServer",
                                 "PublicDnsName"
                             ]
                         },
@@ -1020,7 +1020,7 @@
                     [
                         {
                             "Fn::GetAtt" : [
-                                "windowsServer",
+                                "WindowsServer",
                                 "PublicDnsName"
                             ]
                         },
