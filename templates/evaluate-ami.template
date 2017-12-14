@@ -221,49 +221,49 @@
             ],
             "ParameterLabels" : {
                 "KeyName" : {
-                    "default" : "Which Key should be used?"
+                    "default" : "Key Name"
                 },
                 "InstanceType" : {
-                    "default" : "What EC2 size should be used?"
+                    "default" : "Instance Type"
                 },
                 "VpcId" : {
-                    "default" : "Which VPC should this be deployed to?"
+                    "default" : "Vpc Id"
                 },
                 "RDPFrom": {
-                    "default" : "RDP from"
+                    "default" : "RDP From"
                 },
                 "ESDomain" : {
-                    "default" : "What is the endpoint of ElasticSearch?"
+                    "default" : "ES Domain"
                 },
                 "RetainEvaluateS3" : {
-                    "default" : "Retain Evaluate S3?"
+                    "default" : "Retain Evaluate S3"
                 },
                 "DBEvaluateUser" : {
-                    "default" : "Application database username"
+                    "default" : "DB Evaluate User"
                 },
                 "DBEvaluatePassword" : {
-                    "default" : "Application database password"
+                    "default" : "DB Evaluate Password"
                 },
                 "DBAdminUser" : {
-                    "default" : "Application database master username"
+                    "default" : "DB Admin User"
                 },
                 "DBAdminPassword" : {
-                    "default" : "Application database master password"
+                    "default" : "DB Admin Password"
                 },
                 "DomainDNSName" : {
-                    "default" : "Domain DNS"
+                    "default" : "Domain DNS Name"
                 },
                 "DomainIPs" : {
                     "default" : "Domain IPs"
                 },
                 "DomainAdminUser" : {
-                    "default" : "Domain Administrator username"
+                    "default" : "Domain Admin User"
                 },
                 "DomainAdminPassword" : {
-                    "default" : "Domain Administrator password"
+                    "default" : "Domain Admin Password"
                 },
                 "S3EvaluateBucket" : {
-                    "default" : "Name of new bucket"
+                    "default" : "S3 Evaluate Bucket"
                 }
             }
         }

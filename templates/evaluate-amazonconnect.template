@@ -2,7 +2,7 @@
     "AWSTemplateFormatVersion" : "2010-09-09",
     "Description" : "This template creates a Kinesis Firehose to ElasticSearch to feed from a user inputed Kinesis Stream name",
     "Parameters" : {
-        "kinesisStream" : {
+        "KinesisStream" : {
             "Type" : "String",
             "Description" : "The name of your existing Kinesis Stream"
         },
@@ -10,7 +10,7 @@
             "Type" : "String",
             "Description" : "This is the name for the ElasticSearch Domain"
         },
-        "cidrBlock" : {
+        "CidrBlock" : {
             "Description" : "VPC CIDR Block (eg 10.0.0.0/16)",
             "Type" : "String",
             "AllowedPattern" : "^(2[0-4]\\d|25[0-5]|1?\\d?\\d)(?:\\.(1?[0-9]{1,2})){3}\\/([1-9]|1[0-9]|2[0-9]|3[0-2])$",
@@ -31,7 +31,7 @@
                         "default" : "Amazon Connect Configuration"
                     },
                     "Parameters" : [
-                        "kinesisStream",
+                        "KinesisStream",
                         "S3Bucket"
                     ]
                 },
@@ -41,22 +41,22 @@
                     },
                     "Parameters" : [
                         "ESDomain",
-                        "cidrBlock"
+                        "CidrBlock"
                     ]
                 }
             ],
             "ParameterLabels" : {
-                "kinesisStream" : {
-                    "default" : "Which Stream to use?"
+                "KinesisStream" : {
+                    "default" : "Kinesis Stream"
                 },
                 "ESDomain" : {
-                    "default" : "What name to use?"
+                    "default" : "ES Domain"
                 },
                 "S3Bucket" : {
-                    "default" : "Where to write logs?"
+                    "default" : "S3 Bucket"
                 },
-                "cidrBlock" : {
-                    "default" : "Allow access from?"
+                "CidrBlock" : {
+                    "default" : "Cidr Block"
                 }
             }
         }
@@ -164,7 +164,7 @@
                             ],
                             "Resource" : [
                                 {
-                                    "Fn::Sub" : "arn:aws:kinesis:${AWS::Region}:${AWS::AccountId}:stream/${kinesisStream}"
+                                    "Fn::Sub" : "arn:aws:kinesis:${AWS::Region}:${AWS::AccountId}:stream/${KinesisStream}"
                                 }
                             ]
                         },
@@ -278,7 +278,7 @@
                                 "IpAddress" : {
                                     "aws:SourceIp" : [
                                         {
-                                            "Ref" : "cidrBlock"
+                                            "Ref" : "CidrBlock"
                                         }
                                     ]
                                 }
@@ -711,7 +711,7 @@
                                 },
                                 ":stream/",
                                 {
-                                    "Ref" : "kinesisStream"
+                                    "Ref" : "KinesisStream"
                                 }
                             ]
                         ]
@@ -812,9 +812,9 @@
                 ]
             }
         },
-        "cidrBlock" : {
+        "CidrBlock" : {
             "Value" : {
-                "Ref" : "cidrBlock"
+                "Ref" : "CidrBlock"
             }
         },
         "S3BucketName" : {

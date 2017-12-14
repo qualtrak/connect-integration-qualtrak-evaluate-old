@@ -54,7 +54,7 @@
                     },
                     "Parameters" : [
                         "S3Bucket",
-                        "kinesisStream"
+                        "KinesisStream"
                     ]
                 },
                 {
@@ -77,70 +77,70 @@
             ],
             "ParameterLabels" : {
                 "KeyName" : {
-                    "default" : "Which KeyPair"
+                    "default" : "Key Name"
                 },
                 "InstanceType" : {
-                    "default" : "What EC2 size"
+                    "default" : "Instance Type"
                 },
                 "VpcId" : {
-                    "default" : "Deploy to which VPC"
+                    "default" : "Vpc Id"
                 },
                 "SubnetId" : {
-                    "default" : "Deploy to which subnet"
+                    "default" : "Subnet Id"
                 },
                 "RDPFrom" : {
-                    "default" : "Restrict RDP from"
+                    "default" : "RDP From"
                 },
                 "ESDomainName" : {
-                    "default" : "Name it?"
+                    "default" : "ES Domain Name"
                 },
                 "RetainEvaluateS3" : {
                     "default" : "Retain Evaluate S3"
                 },
                 "DBEvaluateUser" : {
-                    "default" : "Application username"
+                    "default" : "DB Evaluate User"
                 },
                 "DBEvaluatePassword" : {
-                    "default" : "Application password"
+                    "default" : "DB Evaluate Password"
                 },
                 "DBAdminUser" : {
-                    "default" : "Master username"
+                    "default" : "DB Admin User"
                 },
                 "DBAdminPassword" : {
-                    "default" : "Master password"
+                    "default" : "DB Admin Password"
                 },
                 "DomainDNSName" : {
-                    "default" : "Directory name"
+                    "default" : "Domain DNS Name"
                 },
                 "DomainIPs" : {
-                    "default" : "DNS addresses"
+                    "default" : "Domain IPs"
                 },
                 "DomainAdminUser" : {
-                    "default" : "Administrator username"
+                    "default" : "Domain Admin User"
                 },
                 "DomainNetBiosName" : {
-                    "default" : "NetBIOS name"
+                    "default" : "Domain NetBios Name"
                 },
                 "DomainAdminPassword" : {
-                    "default" : "Administrator password"
+                    "default" : "Domain Admin Password"
                 },
-                "kinesisStream" : {
-                    "default" : "Which Stream to use"
+                "KinesisStream" : {
+                    "default" : "Kinesis Stream"
                 },
                 "ESDomain" : {
-                    "default" : "What name to use"
+                    "default" : "ES Domain"
                 },
                 "S3Bucket" : {
-                    "default" : "Where to write logs"
+                    "default" : "S3 Bucket"
                 },
                 "S3EvaluateBucket" : {
-                    "default" : "Name of new bucket"
+                    "default" : "S3 Evaluate Bucket"
                 },
                 "QSS3BucketName" : {
-                    "default" : "Quick Start S3 Bucket Name"
+                    "default" : "QS S3 BucketName"
                 },
                 "QSS3KeyPrefix" : {
-                    "default" : "Quick Start S3 Key Prefix"
+                    "default" : "QS S3 Key Prefix"
                 }
             }
         }
@@ -299,7 +299,7 @@
             "AllowedPattern" : "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?!.*[@/\"']).*$",
             "ConstraintDescription" : "Password does not meet complexity requirements"
         },
-        "kinesisStream" : {
+        "KinesisStream" : {
             "Type" : "String",
             "AllowedPattern" : "[a-zA-Z0-9].*",
             "Description" : "The name of your existing Kinesis Stream",
@@ -448,8 +448,8 @@
                     "Fn::Sub" : "https://qualtrak-aws.s3.amazonaws.com/e4ac/templates/evaluate-amazonconnect.template"
                 },
                 "Parameters" : {
-                    "kinesisStream" : {
-                        "Ref" : "kinesisStream"
+                    "KinesisStream" : {
+                        "Ref" : "KinesisStream"
                     },
                     "ESDomain" : {
                         "Ref" : "ESDomain"
