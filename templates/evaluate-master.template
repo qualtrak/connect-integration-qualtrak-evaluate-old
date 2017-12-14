@@ -608,7 +608,7 @@
             "Type" : "AWS::CloudFormation::Stack",
             "Properties" : {
                 "TemplateURL" : {
-                    "Fn::Sub" : "https://qualtrak-${QSS3BucketName}.s3.amazonaws.com/connect/integration/qualtrak/latest/templates/evaluate.template"
+                    "Fn::Sub" : "https://qualtrak-aws.s3.amazonaws.com/e4ac/templates/evaluate.template"
                 },
                 "Parameters" : {
                     "KeyName" : {
