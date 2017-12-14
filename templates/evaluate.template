@@ -342,7 +342,7 @@
             "Type": "AWS::CloudFormation::Stack",
             "Properties": {
                 "TemplateURL": {
-                    "Fn::Sub": "https://qualtrak-${QSS3BucketName}.s3.amazonaws.com/connect/integration/qualtrak/latest/templates/evaluate-ami-security-json.template"                    
+                    "Fn::Sub": "https://qualtrak-${QSS3BucketName}.s3.amazonaws.com/connect/integration/qualtrak/latest/templates/evaluate-ami-security.template"                    
                 },
                 "Parameters": {                    
                     "RDPFrom": {
@@ -362,7 +362,7 @@
             "Type": "AWS::CloudFormation::Stack",
             "Properties": {
                 "TemplateURL": {
-                    "Fn::Sub": "https://qualtrak-${QSS3BucketName}.s3.amazonaws.com/connect/integration/qualtrak/latest/templates/evaluate-ami-json.template"
+                    "Fn::Sub": "https://qualtrak-${QSS3BucketName}.s3.amazonaws.com/connect/integration/qualtrak/latest/templates/evaluate-ami.template"
                 },
                 "Parameters": {                    
                     "KeyName": {
@@ -445,7 +445,7 @@
             "DependsOn": "amisecuritystack",
             "Properties": {
                 "TemplateURL": {
-                    "Fn::Sub": "https://qualtrak-${QSS3BucketName}.s3.amazonaws.com/connect/integration/qualtrak/latest/templates/evaluate-amazonconnect-json.template"
+                    "Fn::Sub": "https://qualtrak-${QSS3BucketName}.s3.amazonaws.com/connect/integration/qualtrak/latest/templates/evaluate-amazonconnect.template"
                 },
                 "Parameters": {                    
                     "kinesisStream": {
