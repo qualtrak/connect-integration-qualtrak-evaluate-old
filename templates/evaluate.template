@@ -312,9 +312,7 @@
         },
         "S3Bucket" : {
             "Description" : "Please refer to http://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-instance.html#datastorage for details on how retrieve the S3 bucket associated with your Amazon Connect instance. This is the S3 bucket where Amazon Connect stores call recordings and scheduled reports.",
-            "Type" : "String",
-            "AllowedPattern" : "connect-[0-9a-f]{12}",
-            "ConstraintDescription" : "Invalid S3 Bucket format. Must be in the form connect-xxxxxxxxxxxx"
+            "Type" : "String"
         },
         "S3EvaluateBucket" : {
             "Type" : "String",
