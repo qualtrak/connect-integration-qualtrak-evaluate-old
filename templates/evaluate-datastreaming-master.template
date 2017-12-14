@@ -1,67 +1,67 @@
 {
-    "AWSTemplateFormatVersion": "2010-09-09",
-    "Description": "Data Streaming Integration (Master Template) for Amazon Connect Quick Start (qs-1nr3h3qmh)",
-    "Mappings": {
-        "AWSRegionToFirehose": {
-            "us-east-1": {
-                "IPRange": "52.70.63.192/27"
+    "AWSTemplateFormatVersion" : "2010-09-09",
+    "Description" : "Data Streaming Integration (Master Template) for Amazon Connect Quick Start (qs-1nr3h3qmh)",
+    "Mappings" : {
+        "AWSRegionToFirehose" : {
+            "us-east-1" : {
+                "IPRange" : "52.70.63.192/27"
             },
-            "us-east-2": {
-                "IPRange": "13.58.135.96/27"
+            "us-east-2" : {
+                "IPRange" : "13.58.135.96/27"
             },
-            "us-west-2": {
-                "IPRange": "52.89.255.224/27"
+            "us-west-2" : {
+                "IPRange" : "52.89.255.224/27"
             },
-            "ap-northeast-1": {
-                "IPRange": "13.113.196.224/27"
+            "ap-northeast-1" : {
+                "IPRange" : "13.113.196.224/27"
             },
-            "eu-central-1": {
-                "IPRange": "35.158.127.160/27"
+            "eu-central-1"   : {
+                "IPRange" : "35.158.127.160/27"
             },
-            "eu-west-1": {
-                "IPRange": "52.19.239.192/27"
+            "eu-west-1"      : {
+                "IPRange" : "52.19.239.192/27"
             }
         },
-        "QuickSightRegionConfig": {
-            "us-east-1": {
-                "IPRange": "52.23.63.224/27"
+        "QuickSightRegionConfig" : {
+            "us-east-1" : {
+                "IPRange" : "52.23.63.224/27"
             },
-            "us-east-2": {
-                "IPRange": "52.15.247.160/27"
+            "us-east-2" : {
+                "IPRange" : "52.15.247.160/27"
             },
-            "us-west-2": {
-                "IPRange": "54.70.204.128/27"
+            "us-west-2" : {
+                "IPRange" : "54.70.204.128/27"
             },
-            "ap-southeast-1": {
-                "IPRange": "13.229.254.0/27"
+            "ap-southeast-1" : {
+                "IPRange" : "13.229.254.0/27"
             },
-            "ap-southeast-2": {
-                "IPRange": "54.153.249.96/27"
+            "ap-southeast-2" : {
+                "IPRange" : "54.153.249.96/27"
             },
-            "eu-west-1": {
-                "IPRange": "52.210.255.224/27"
+            "eu-west-1" : {
+                "IPRange" : "52.210.255.224/27"
             }
         }
     },
-    "Metadata": {
-        "AWS::CloudFormation::Interface": {
-            "ParameterGroups": [
+    "Metadata" : {
+        "AWS::CloudFormation::Interface" : {
+            "ParameterGroups" : [
                 {
-                    "Label": {
-                        "default": "Network Configuration"
+                    "Label" : {
+                        "default" : "Network Configuration"
                     },
-                    "Parameters": [                        
+                    "Parameters" : [
                         "VpcId",
-                        "PrivateSubnetID",                        
+                        "PrivateSubnetID",
                         "PublicSubnetID",
                         "KeyPairName"
                     ]
                 },
                 {
-                    "Label": {
-                        "default": "Amazon Redshift Configuration"
+                    "Label" : {
+                        "default" : "Amazon Redshift Configuration"
                     },
-                    "Parameters": [
+                    "Parameters" : [
                         "DBName",
                         "DBUser",
                         "DBPwd",
@@ -73,9 +73,9 @@
                         "default" : "EC2 Configuration"
                     },
                     "Parameters" : [
-                        "InstanceType",                                             
+                        "InstanceType",
                         "RDPFrom",
-                        "SubnetId"                                          
+                        "SubnetId"
                     ]
                 },
                 {
@@ -93,7 +93,7 @@
                     "Label" : {
                         "default" : "S3 Configuration"
                     },
-                    "Parameters" : [                      
+                    "Parameters" : [
                         "RetainEvaluateS3",
                         "S3EvaluateBucket"
                     ]
@@ -107,14 +107,14 @@
                         "DomainIPs",
                         "DomainNetBiosName",
                         "DomainAdminUser",
-                        "DomainAdminPassword"                       
+                        "DomainAdminPassword"
                     ]
                 },
                 {
                     "Label" : {
                         "default" : "Amazon Connect Configuration"
                     },
-                    "Parameters" : [      
+                    "Parameters" : [
                         "S3Bucket"
                     ]
                 },
@@ -127,80 +127,80 @@
                     ]
                 },
                 {
-                    "Label": {
-                        "default": "AWS Quick Start Configuration"
+                    "Label" : {
+                        "default" : "AWS Quick Start Configuration"
                     },
-                    "Parameters": [
+                    "Parameters" : [
                         "QSS3BucketName",
                         "QSS3KeyPrefix"
                     ]
                 }
             ],
-            "ParameterLabels": {
-                "VpcId"        : {
+            "ParameterLabels" : {
+                "VpcId" : {
                     "default" : "Deploy to which VPC"
-                },              
-                "SubnetId"        : {
+                },
+                "SubnetId" : {
                     "default" : "Deploy to which subnet"
-                },    
-                "DBName": {
-                    "default": "Database Name"
                 },
-                "DBPort": {
-                    "default": "Database Port"
+                "DBName" : {
+                    "default" : "Database Name"
                 },
-                "DBPwd": {
-                    "default": "Master User Password"
+                "DBPort" : {
+                    "default" : "Database Port"
                 },
-                "DBUser": {
-                    "default": "Master User Name"
+                "DBPwd" : {
+                    "default" : "Master User Password"
                 },
-                "KeyPairName": {
-                    "default": "Key Pair Name"
+                "DBUser" : {
+                    "default" : "Master User Name"
                 },
-                "PrivateSubnetID": {
-                    "default": "Private Subnet"
-                },                
-                "PublicSubnetID": {
-                    "default": "Public Subnet"
+                "KeyPairName" : {
+                    "default" : "Key Pair Name"
                 },
-                "QSS3BucketName": {
-                    "default": "Quick Start S3 Bucket Name"
+                "PrivateSubnetID" : {
+                    "default" : "Private Subnet"
                 },
-                "QSS3KeyPrefix": {
-                    "default": "Quick Start S3 Key Prefix"
-                },               
+                "PublicSubnetID" : {
+                    "default" : "Public Subnet"
+                },
+                "QSS3BucketName" : {
+                    "default" : "Quick Start S3 Bucket Name"
+                },
+                "QSS3KeyPrefix" : {
+                    "default" : "Quick Start S3 Key Prefix"
+                },
                 "InstanceType" : {
                     "default" : "What EC2 size"
-                },               
-                "RDPFrom"      : {
+                },
+                "RDPFrom" : {
                     "default" : "Restrict RDP from"
                 },
-                "ESDomainName"  : {
+                "ESDomainName" : {
                     "default" : "Name it?"
-                },               
+                },
                 "RetainEvaluateS3" : {
                     "default" : "Retain Evaluate S3"
                 },
-                "DBEvaluateUser"   : {
+                "DBEvaluateUser" : {
                     "default" : "Application username"
                 },
                 "DBEvaluatePassword" : {
                     "default" : "Application password"
                 },
-                "DBAdminUser"        : {
+                "DBAdminUser" : {
                     "default" : "Master username"
                 },
-                "DBAdminPassword"    : {
+                "DBAdminPassword" : {
                     "default" : "Master password"
                 },
-                "DomainDNSName"      : {
+                "DomainDNSName" : {
                     "default" : "Directory name"
                 },
-                "DomainIPs"          : {
+                "DomainIPs" : {
                     "default" : "DNS addresses"
                 },
-                "DomainAdminUser"    : {
+                "DomainAdminUser" : {
                     "default" : "Administrator username"
                 },
                 "DomainNetBiosName" : {
@@ -209,10 +209,10 @@
                 "DomainAdminPassword" : {
                     "default" : "Administrator password"
                 },
-                "ESDomain"      : {
+                "ESDomain" : {
                     "default" : "What name to use"
                 },
-                "S3Bucket"      : {
+                "S3Bucket" : {
                     "default" : "Where to write logs"
                 },
                 "S3EvaluateBucket" : {
@@ -221,87 +221,87 @@
             }
         }
     },
-    "Parameters": {
-        "VpcId"               : {
+    "Parameters" : {
+        "VpcId" : {
             "Description" : "VPC Id",
-            "Type"        : "AWS::EC2::VPC::Id"
-        },         
-        "SubnetId"            : {
+            "Type" : "AWS::EC2::VPC::Id"
+        },
+        "SubnetId" : {
             "Description" : "Subnet Id, must be same CIDR that was supplied when ElasticSearch was deployed",
-            "Type"        : "AWS::EC2::Subnet::Id"
+            "Type" : "AWS::EC2::Subnet::Id"
         },
-        "DBName": {
-            "Description": "Provide a name for your database or accept the default",
-            "Type": "String",
-            "Default": "acctr"
+        "DBName" : {
+            "Description" : "Provide a name for your database or accept the default",
+            "Type" : "String",
+            "Default" : "acctr"
         },
-        "DBPort": {
-            "Description": "Provide a database port or accept the default",
-            "Type": "Number",
-            "MinValue": 1150,
-            "MaxValue": 65535,
-            "Default": 5439
+        "DBPort" : {
+            "Description" : "Provide a database port or accept the default",
+            "Type" : "Number",
+            "MinValue" : 1150,
+            "MaxValue" : 65535,
+            "Default" : 5439
         },
-        "DBPwd": {
-            "AllowedPattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?!.*[@/\\\\\"']).*$",
-            "ConstraintDescription": "Password does not meet complexity requirements",
-            "Description": "Password must contain 8 to 64 printable ASCII characters excluding /, \", ', \\, and @. It must contain 1 uppercase letter, 1 lowercase letter, and 1 number.",
-            "Type": "String",
-            "MinLength": 8,
-            "MaxLength": 64,
-            "NoEcho": true
+        "DBPwd"    : {
+            "AllowedPattern" : "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?!.*[@/\\\\\"']).*$",
+            "ConstraintDescription" : "Password does not meet complexity requirements",
+            "Description" : "Password must contain 8 to 64 printable ASCII characters excluding /, \", ', \\, and @. It must contain 1 uppercase letter, 1 lowercase letter, and 1 number.",
+            "Type" : "String",
+            "MinLength" : 8,
+            "MaxLength" : 64,
+            "NoEcho" : true
         },
-        "DBUser": {
-            "Description": "Provide a name for the database administrator account or accept the default",
-            "Type": "String"
+        "DBUser" : {
+            "Description" : "Provide a name for the database administrator account or accept the default",
+            "Type" : "String"
         },
-        "KeyPairName": {
-            "ConstraintDescription": "You must provide a key pair",
-            "Description": "Select the name of an existing public/private key pair. Please go to the EC2 console and create a key pair if you do not have one",
-            "Type": "AWS::EC2::KeyPair::KeyName"
+        "KeyPairName" : {
+            "ConstraintDescription" : "You must provide a key pair",
+            "Description" : "Select the name of an existing public/private key pair. Please go to the EC2 console and create a key pair if you do not have one",
+            "Type" : "AWS::EC2::KeyPair::KeyName"
         },
-        "PrivateSubnetID": {
-            "Description": "Select at least one private subnet",
-            "Type": "List<AWS::EC2::Subnet::Id>"            
+        "PrivateSubnetID" : {
+            "Description" : "Select at least one private subnet",
+            "Type" : "List<AWS::EC2::Subnet::Id>"
         },
-        "PublicSubnetID": {
-            "Description": "Select at least one public subnet",
-            "Type": "List<AWS::EC2::Subnet::Id>"
-        },       
-        "QSS3BucketName": {
-            "AllowedPattern": "^[0-9a-zA-Z]+([0-9a-zA-Z-]*[0-9a-zA-Z])*$",
-            "ConstraintDescription": "Quick Start bucket name can include numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen (-)",
-            "Description": "S3 bucket name for the Quick Start assets. This string can include numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen (-)",
-            "Type": "String",
-            "Default": "quickstart-reference"
+        "PublicSubnetID" : {
+            "Description" : "Select at least one public subnet",
+            "Type" : "List<AWS::EC2::Subnet::Id>"
         },
-        "QSS3KeyPrefix": {
-            "AllowedPattern": "^[0-9a-zA-Z-/]*$",
-            "ConstraintDescription": "Quick Start key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slash (/)",
-            "Description": "S3 key prefix for the Quick Start assets. Quick Start key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slash (/)",
-            "Type": "String",
-            "Default": "connect/integration/datastreaming/latest/"
-        },       
+        "QSS3BucketName" : {
+            "AllowedPattern" : "^[0-9a-zA-Z]+([0-9a-zA-Z-]*[0-9a-zA-Z])*$",
+            "ConstraintDescription" : "Quick Start bucket name can include numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen (-)",
+            "Description" : "S3 bucket name for the Quick Start assets. This string can include numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen (-)",
+            "Type" : "String",
+            "Default" : "quickstart-reference"
+        },
+        "QSS3KeyPrefix" : {
+            "AllowedPattern" : "^[0-9a-zA-Z-/]*$",
+            "ConstraintDescription" : "Quick Start key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slash (/)",
+            "Description" : "S3 key prefix for the Quick Start assets. Quick Start key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slash (/)",
+            "Type" : "String",
+            "Default" : "connect/integration/datastreaming/latest/"
+        },
         "RetainEvaluateS3" : {
             "Description" : "After you have deleted this Stack, do you want to retain or delete the Evaluate S3 where all your Evaluation Attachments are stored?",
-            "Default"     : "No",
-            "Type"        : "String",
+            "Default" : "No",
+            "Type" : "String",
             "AllowedValues" : [
                 "Yes",
                 "No"
             ],
             "ConstraintDescription" : "must specify Yes or No."
         },
-        "RDPFrom"          : {
+        "RDPFrom" : {
             "Description" : "Lockdown RDP access to EC2 instance from valid IPv4 address, e.g. 201.0.1.3/19",
-            "Type"        : "String",           
+            "Type" : "String",
             "AllowedPattern" : "^(2[0-4]\\d|25[0-5]|1?\\d?\\d)(?:\\.(1?[0-9]{1,2})){3}\\/([1-9]|1[0-9]|2[0-9]|3[0-2])$",
             "ConstraintDescription" : "Must not be empty, must be valid IPv4 address with valid Mask Bit from 1-32, format of x.x.x.x/x"
         },
-        "InstanceType"     : {
+        "InstanceType" : {
             "Description" : "Amazon EC2 instance type",
-            "Type"        : "String",
-            "Default"     : "m4.large",
+            "Type" : "String",
+            "Default" : "m4.large",
             "AllowedValues" : [
                 "t2.medium",
                 "m1.small",
@@ -354,83 +354,83 @@
             ],
             "ConstraintDescription" : "must be a valid EC2 instance type."
         },
-        "DomainDNSName"    : {
+        "DomainDNSName" : {
             "Description" : "Fully qualified domain name (FQDN) of the forest root domain e.g. corp.example.com",
-            "Type"        : "String",          
-            "MaxLength"   : "253",
+            "Type" : "String",
+            "MaxLength" : "253",
             "AllowedPattern" : "(?=^.{4,253}$)(^((?!-)[a-zA-Z0-9-]{1,63}(?<!-)\\.)+[a-zA-Z]{2,63}\\.?$)",
             "ConstraintDescription" : "Must not be empty, allowed ASCII letters, case insensitive, digits, hyphens ('-'), labels, cannot start or end with a hyphen, trailings dots are allowed, labels can start with numbers, max length of hostname is 253 characters, underscores are not allowed"
         },
-        "DBEvaluateUser"   : {
+        "DBEvaluateUser" : {
             "Default" : "EvaluateUser",
             "NoEcho"  : "false",
             "Description" : "The database non-admin account username",
-            "Type"        : "String",           
+            "Type" : "String",
             "AllowedPattern" : "[a-zA-Z][a-zA-Z0-9]*",
             "ConstraintDescription" : "Must not be empty, must begin with a letter and contain only alphanumeric characters"
         },
-        "DBEvaluatePassword" : {         
-            "NoEcho"  : "true",
-            "Description" : "Password must contain 8 to 64 printable ASCII characters excluding \/, \", ', \\, and @. It must contain 1 uppercase letter, 1 lowercase letter, and 1 number.",
-            "Type"        : "String",
-            "MinLength"   : "8",
-            "MaxLength"   : "64",
-            "AllowedPattern" : "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?!.*[@\/\"']).*$",
+        "DBEvaluatePassword" : {
+            "NoEcho" : "true",
+            "Description" : "Password must contain 8 to 64 printable ASCII characters excluding /, \", ', \\, and @. It must contain 1 uppercase letter, 1 lowercase letter, and 1 number.",
+            "Type" : "String",
+            "MinLength" : "8",
+            "MaxLength" : "64",
+            "AllowedPattern" : "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?!.*[@/\"']).*$",
             "ConstraintDescription" : "Password does not meet complexity requirements"
         },
-        "DomainIPs"          : {
-            "NoEcho"  : "false",
+        "DomainIPs" : {
+            "NoEcho" : "false",
             "Description" : "A comma separated list of DNS IP addresses for the AD Domain",
-            "Type"        : "String",
+            "Type" : "String",
             "AllowedPattern" : "^(2[0-4]\\d|25[0-5]|1?\\d?\\d)(?:\\.(1?[0-9]{1,2})){3},(2[0-4]\\d|25[0-5]|1?\\d?\\d)(?:\\.(1?[0-9]{1,2})){3}$",
             "ConstraintDescription" : "Must be 2 valid IPv4 addresses separated by a ',' with no white spaces. e.g. 11.0.2.10,11.0.3.10"
         },
-        "DomainAdminUser"    : {
+        "DomainAdminUser" : {
             "Default" : "Administrator",
             "Description" : "User name for the account that will be added as Domain Administrator. This is separate from the default \"EC2 Administrator\" account",
-            "Type"        : "String",
+            "Type" : "String",
             "AllowedPattern" : "[a-zA-Z][a-zA-Z0-9]*",
             "ConstraintDescription" : "Must not be empty, must begin with a letter and contain only alphanumeric characters"
         },
-        "DomainAdminPassword" : {           
-            "NoEcho"  : "true",
+        "DomainAdminPassword" : {
+            "NoEcho" : "true",
             "Description" : "Password of the Domain Administrator's account. This is separate from the default \"EC2 Administrator\" account",
-            "Type"        : "String"
+            "Type" : "String"
         },
-        "DomainNetBiosName"   : {
+        "DomainNetBiosName" : {
             "Description" : "Netbios name for the domain, e.g. MYCOMPANY",
-            "Type"        : "String",
+            "Type" : "String",
             "AllowedPattern" : "[a-zA-Z][a-zA-Z0-9]*",
             "ConstraintDescription" : "Must not be empty, must begin with a letter and contain only alphanumeric characters"
-        },       
-        "DBAdminUser"         : {
+        },
+        "DBAdminUser" : {
             "Default" : "EvaluateAdmin",
-            "NoEcho"  : "false",
+            "NoEcho" : "false",
             "Description" : "The database admin account username",
-            "Type"        : "String",
-            "MinLength"   : "1",
-            "MaxLength"   : "16",
+            "Type" : "String",
+            "MinLength" : "1",
+            "MaxLength" : "16",
             "AllowedPattern" : "[a-zA-Z][a-zA-Z0-9]*",
             "ConstraintDescription" : "Must not be empty, must begin with a letter and contain only alphanumeric characters."
         },
-        "DBAdminPassword"     : {           
-            "NoEcho"  : "true",
-            "Description" : "Password must contain 8 to 64 printable ASCII characters excluding \/, \", ', \\, and @. It must contain 1 uppercase letter, 1 lowercase letter, and 1 number.",
-            "Type"        : "String",
-            "MinLength"   : "8",
-            "MaxLength"   : "64",
-            "AllowedPattern" : "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?!.*[@\/\"']).*$",
+        "DBAdminPassword" : {
+            "NoEcho" : "true",
+            "Description" : "Password must contain 8 to 64 printable ASCII characters excluding /, \", ', \\, and @. It must contain 1 uppercase letter, 1 lowercase letter, and 1 number.",
+            "Type" : "String",
+            "MinLength" : "8",
+            "MaxLength" : "64",
+            "AllowedPattern" : "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?!.*[@/\"']).*$",
             "ConstraintDescription" : "Password does not meet complexity requirements"
         },
-        "ESDomain"      : {
+        "ESDomain" : {
             "Default" : "evaluate",
-            "Type"    : "String",
+            "Type" : "String",
             "Description" : "This is the name for the ElasticSearch Domain"
         },
-        "S3Bucket"      : {
+        "S3Bucket" : {
             "Description" : "Please refer to http://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-instance.html#datastorage for details on how retrieve the S3 bucket associated with your Amazon Connect instance. This is the S3 bucket where Amazon Connect stores call recordings and scheduled reports.",
-            "Type"        : "String",            
-            "AllowedPattern": "connect-[0-9a-f]{12}",
+            "Type" : "String",
+            "AllowedPattern" : "connect-[0-9a-f]{12}",
             "ConstraintDescription" : "Invalid S3 Bucket format. Must be in the form connect-xxxxxxxxxxxx"
         },
         "S3EvaluateBucket" : {
@@ -440,90 +440,100 @@
             "ConstraintDescription" : "The bucket name can include numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen (-) "
         }
     },
-    "Rules": {
-        "RegionSupport": {
-            "Assertions": [
+    "Rules" : {
+        "RegionSupport" : {
+            "Assertions" : [
                 {
-                    "Assert": {
-                        "Fn::Equals": [
+                    "Assert" : {
+                        "Fn::Equals" : [
                             {
-                                "Ref": "AWS::Region"
+                                "Ref" : "AWS::Region"
                             },
                             "us-east-1"
                         ]
                     },
-                    "AssertDescription": "Region must be US East (N. Virginia) - us-east-1"
+                    "AssertDescription" : "Region must be US East (N. Virginia) - us-east-1"
                 }
             ]
         },
-        "KeyPairsNotEmpty": {
-            "Assertions": [
+        "KeyPairsNotEmpty" : {
+            "Assertions" : [
                 {
-                    "Assert": {
-                        "Fn::Not": [
+                    "Assert" : {
+                        "Fn::Not" : [
                             {
-                                "Fn::EachMemberEquals": [
+                                "Fn::EachMemberEquals" : [
                                     {
-                                        "Fn::RefAll": "AWS::EC2::KeyPair::KeyName"
+                                        "Fn::RefAll" : "AWS::EC2::KeyPair::KeyName"
                                     },
                                     ""
                                 ]
                             }
                         ]
                     },
-                    "AssertDescription": "All key pair parameters must not be empty"
+                    "AssertDescription" : "All key pair parameters must not be empty"
                 }
             ]
         }
     },
-    "Resources": {      
-        "DataStreamingStack": {           
-            "Type": "AWS::CloudFormation::Stack",
-            "Properties": {
-                "TemplateURL": {
-                    "Fn::Sub": "https://${QSS3BucketName}.s3.amazonaws.com/${QSS3KeyPrefix}templates/datastreaming.template"
+    "Resources" : {
+        "DataStreamingStack" : {
+            "Type" : "AWS::CloudFormation::Stack",
+            "Properties" : {
+                "TemplateURL" : {
+                    "Fn::Sub" : "https://${QSS3BucketName}.s3.amazonaws.com/${QSS3KeyPrefix}templates/datastreaming.template"
                 },
-                "Parameters": {
-                    "PrivateSubnetID": {                                               
-                        "Fn::Join" : [ ",", { "Ref" : "PrivateSubnetID"  }] 
+                "Parameters" : {
+                    "PrivateSubnetID" : {
+                        "Fn::Join" : [
+                            ",",
+                            {
+                                "Ref" : "PrivateSubnetID"
+                            }
+                        ]
                     },
-                    "PublicSubnetID": {
-                        "Fn::Join" : [ ",", { "Ref" : "PublicSubnetID" }] 
+                    "PublicSubnetID" : {
+                        "Fn::Join" : [
+                            ",",
+                            {
+                                "Ref" : "PublicSubnetID"
+                            }
+                        ]
                     },
-                    "DBName": {
-                        "Ref": "DBName"
+                    "DBName" : {
+                        "Ref" : "DBName"
                     },
-                    "DBUser": {
-                        "Ref": "DBUser"
+                    "DBUser" : {
+                        "Ref" : "DBUser"
                     },
-                    "DBPwd": {
-                        "Ref": "DBPwd"
+                    "DBPwd" : {
+                        "Ref" : "DBPwd"
                     },
-                    "DBPort": {
-                        "Ref": "DBPort"
+                    "DBPort" : {
+                        "Ref" : "DBPort"
                     },
-                    "QSS3BucketName": {
-                        "Ref": "QSS3BucketName"
+                    "QSS3BucketName" : {
+                        "Ref" : "QSS3BucketName"
                     },
-                    "QSS3KeyPrefix": {
-                        "Ref": "QSS3KeyPrefix"
+                    "QSS3KeyPrefix" : {
+                        "Ref" : "QSS3KeyPrefix"
                     },
-                    "VPCID": {
-                        "Ref": "VpcId"
+                    "VPCID" : {
+                        "Ref" : "VpcId"
                     }
                 }
             }
         },
-        "amistack": {
-            "DependsOn": "DataStreamingStack",
-            "Type": "AWS::CloudFormation::Stack",
-            "Properties": {
-                "TemplateURL": {
-                    "Fn::Sub": "https://qualtrak-${QSS3BucketName}.s3.amazonaws.com/connect/integration/qualtrak/latest/templates/evaluate.template"
+        "amistack" : {
+            "DependsOn" : "DataStreamingStack",
+            "Type" : "AWS::CloudFormation::Stack",
+            "Properties" : {
+                "TemplateURL" : {
+                    "Fn::Sub" : "https://qualtrak-${QSS3BucketName}.s3.amazonaws.com/connect/integration/qualtrak/latest/templates/evaluate.template"
                 },
-                "Parameters": {                    
-                    "KeyName": {
-                        "Ref": "KeyPairName"
+                "Parameters" : {
+                    "KeyName" : {
+                        "Ref" : "KeyPairName"
                     },
                     "RetainEvaluateS3" : {
                         "Ref" : "RetainEvaluateS3"
@@ -556,11 +566,11 @@
                         "Ref" : "DomainNetBiosName"
                     },
                     "VpcId" : {
-                        "Ref": "VpcId"                    
+                        "Ref" : "VpcId"
                     },
-                    "SubnetId" : { 
-                        "Ref": "SubnetId"   
-                    } ,
+                    "SubnetId" : {
+                        "Ref" : "SubnetId"
+                    },
                     "DBAdminUser" : {
                         "Ref" : "DBAdminUser"
                     },
@@ -568,23 +578,23 @@
                         "Ref" : "DBAdminPassword"
                     },
                     "S3Bucket" : {
-                        "Ref": "S3Bucket"
+                        "Ref" : "S3Bucket"
                     },
-                    "ESDomain": {
-                        "Ref": "ESDomain"
+                    "ESDomain" : {
+                        "Ref" : "ESDomain"
                     },
                     "S3EvaluateBucket" : {
                         "Ref" : "S3EvaluateBucket"
                     },
-                    "kinesisStream": {
-                        "Fn::GetAtt": "DataStreamingStack.Outputs.KinesisStream"
+                    "kinesisStream" : {
+                        "Fn::GetAtt" : "DataStreamingStack.Outputs.KinesisStream"
                     },
-                    "QSS3BucketName": {
-                        "Ref": "QSS3BucketName"
+                    "QSS3BucketName" : {
+                        "Ref" : "QSS3BucketName"
                     },
-                    "QSS3KeyPrefix": {
-                        "Ref": "QSS3KeyPrefix"
-                    }                  
+                    "QSS3KeyPrefix" : {
+                        "Ref" : "QSS3KeyPrefix"
+                    }
                 }
             }
         }
