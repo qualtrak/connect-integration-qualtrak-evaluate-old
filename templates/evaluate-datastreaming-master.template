@@ -524,7 +524,7 @@
                 }
             }
         },
-        "amistack" : {
+        "EvaluateStack" : {
             "DependsOn" : "DataStreamingStack",
             "Type" : "AWS::CloudFormation::Stack",
             "Properties" : {
