@@ -377,17 +377,7 @@
                         },
                         "PolicyDocument" : {
                             "Version" : "2012-10-17",
-                            "Statement" : [
-                                {
-                                    "Effect" : "Allow",
-                                    "Action" : "*",
-                                    "Resource" : "*"
-                                },
-                                {
-                                    "Effect" : "Allow",
-                                    "Action" : "s3:*",
-                                    "Resource" : "*"
-                                },
+                            "Statement" : [ 
                                 {
                                     "Effect" : "Allow",
                                     "Action" : "s3:ListBucket",
@@ -428,7 +418,10 @@
                                     "Effect" : "Allow",
                                     "Action" : [
                                         "s3:GetObject",
-                                        "s3:PutObject"
+                                        "s3:PutObject",
+                                        "s3:DeleteObject",
+                                        "logs:CreateLogStream",
+                                        "logs:PutLogEvents"
                                     ],
                                     "Resource" : [
                                         {
@@ -456,7 +449,9 @@
                                 {
                                     "Effect" : "Allow",
                                     "Action" : [
-                                        "s3:GetObject"
+                                        "s3:GetObject",
+                                        "logs:CreateLogStream",
+                                        "logs:PutLogEvents"
                                     ],
                                     "Resource" : [
                                         {
@@ -474,12 +469,41 @@
                                     ]
                                 },
                                 {
-                                    "Effect" : "Allow",
-                                    "Action" : [
-                                        "logs:CreateLogStream",
-                                        "logs:PutLogEvents"
+                                    "Effect": "Allow",
+                                    "Principal": {
+                                      "AWS": [
+                                        {"Ref" : "AWS::AccountId"}
+                                      ]
+                                    },
+                                    "Action": [
+                                      "es:DescribeElasticsearchDomain",
+                                      "es:DescribeElasticsearchDomainConfig",
+                                      "es:ESHttpGet",
+                                      "es:ESHttpHead",
+                                      "es:ListTags"
                                     ],
-                                    "Resource" : "*"
+                                    "Resource": [
+                                        {
+                                            "Fn::Join" : [
+                                                "",
+                                                [
+                                                    "arn:aws:es:",
+                                                    {
+                                                        "Ref" : "AWS::Region"
+                                                    },
+                                                    ":",
+                                                    {
+                                                        "Ref" : "AWS::AccountId"
+                                                    },
+                                                    ":domain/",
+                                                    {
+                                                        "Ref" : "ESDomain"
+                                                    },
+                                                    "/*"
+                                                ]
+                                            ]
+                                        }
+                                    ]
                                 }
                             ]
                         }
