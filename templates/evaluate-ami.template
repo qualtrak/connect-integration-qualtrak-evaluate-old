@@ -151,18 +151,22 @@
             "ConstraintDescription" : "Password does not meet complexity requirements"
         },
         "S3Bucket" : {
-            "Type" : "String"
+            "Type" : "String",
+            "MinLength" : "3",
+            "MaxLength" : "63",
+            "AllowedPattern" : "^[a-z0-9]+([0-9a-zA-Z-.]*[0-9a-z])*$",
+            "ConstraintDescription" : "Must not be empty, must begin with a letter or number and contain only alphanumeric, lowercase characters, must not end with . or -, no longer than 63 characters in length"
         },
         "ESDomain" : {
             "Type" : "String"
         },
         "S3EvaluateBucket" : {
             "Type" : "String",
-            "Description" : "The name of a new bucket that will be used to store Attachments. The actual name will be evaluate-<AccountId>-<whatever-you-enter-here>, e.g. evaluate-344201342714-myNewBucket",
-            "MinLength" : "8",
+            "Description" : "The name of a new bucket that will be used to store Attachments. The actual name will be evaluate-<AccountId>-<whatever-you-enter-here>, e.g. evaluate-344201342714-my.new.bucket",
+            "MinLength" : "3",
             "MaxLength" : "41",
-            "AllowedPattern" : "[a-z0-9].*",
-            "ConstraintDescription" : "Must not be empty, must begin with a letter and contain only alphanumeric, lowercase characters"
+            "AllowedPattern" : "^[a-z0-9]+([0-9a-zA-Z-.]*[0-9a-z])*$",
+            "ConstraintDescription" : "Must not be empty, must begin with a letter or number and contain only alphanumeric, lowercase characters, must not end with . or -, no longer than 41 characters in length"
         },
         "webXface" : {
             "Type" : "String"
