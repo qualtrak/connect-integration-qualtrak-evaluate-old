@@ -180,28 +180,14 @@
             }
         },
         "DeliveryStream" : {
-            "Type" : "AWS::Logs::LogGroup",
-            "Properties" : {
-                "LogGroupName" : {
-                    "Fn::Join" : [
-                        "",
-                        [
-                            "/aws/kinesisfirehose/ac",
-                            {
-                                "Ref" : "AWS::StackName"
-                            }
-                        ]
-                    ]
-                }
-            }
+            "Type" : "AWS::Logs::LogGroup"            
         },
         "S3LogStream" : {
             "Type" : "AWS::Logs::LogStream",
             "Properties" : {
                 "LogGroupName" : {
                     "Ref" : "DeliveryStream"
-                },
-                "LogStreamName" : "S3Delivery"
+                }
             }
         },
         "ESLogStream" : {
@@ -209,8 +195,7 @@
             "Properties" : {
                 "LogGroupName" : {
                     "Ref" : "DeliveryStream"
-                },
-                "LogStreamName" : "ESDelivery"
+                }
             }
         },
         "ElasticsearchDomain" : {
