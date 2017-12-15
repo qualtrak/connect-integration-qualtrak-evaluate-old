@@ -367,31 +367,6 @@
                         {
                             "Effect" : "Allow",
                             "Action" : [
-                                "lambda:InvokeFunction",
-                                "lambda:GetFunctionConfiguration"
-                            ],
-                            "Resource" : [
-                                {
-                                    "Fn::Join" : [
-                                        "",
-                                        [
-                                            "arn:aws:lambda:",
-                                            {
-                                                "Ref" : "AWS::Region"
-                                            },
-                                            ":",
-                                            {
-                                                "Ref" : "AWS::AccountId"
-                                            },
-                                            ":function:%FIREHOSE_DEFAULT_FUNCTION%:%FIREHOSE_DEFAULT_VERSION%"
-                                        ]
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            "Effect" : "Allow",
-                            "Action" : [
                                 "es:DescribeElasticsearchDomain",
                                 "es:DescribeElasticsearchDomains",
                                 "es:DescribeElasticsearchDomainConfig",
@@ -635,78 +610,6 @@
                                     ]
                                 }
                             ]
-                        },
-                        {
-                            "Sid" : "",
-                            "Effect" : "Allow",
-                            "Action" : [
-                                "kinesis:DescribeStream",
-                                "kinesis:GetShardIterator",
-                                "kinesis:GetRecords"
-                            ],
-                            "Resource" : {
-                                "Fn::Join" : [
-                                    "",
-                                    [
-                                        "arn:aws:kinesis:",
-                                        {
-                                            "Ref" : "AWS::Region"
-                                        },
-                                        ":",
-                                        {
-                                            "Ref" : "AWS::AccountId"
-                                        },
-                                        ":stream/%FIREHOSE_STREAM_NAME%"
-                                    ]
-                                ]
-                            }
-                        },
-                        {
-                            "Effect" : "Allow",
-                            "Action" : [
-                                "kms:Decrypt"
-                            ],
-                            "Resource" : [
-                                {
-                                    "Fn::Join" : [
-                                        "",
-                                        [
-                                            "arn:aws:kms:",
-                                            {
-                                                "Ref" : "AWS::Region"
-                                            },
-                                            ":",
-                                            {
-                                                "Ref" : "AWS::AccountId"
-                                            },
-                                            ":key/%SSE_KEY_ARN%"
-                                        ]
-                                    ]
-                                }
-                            ],
-                            "Condition" : {
-                                "StringEquals" : {
-                                    "kms:ViaService" : "kinesis.%REGION_NAME%.amazonaws.com"
-                                },
-                                "StringLike"   : {
-                                    "kms:EncryptionContext:aws:kinesis:arn" : {
-                                        "Fn::Join" : [
-                                            "",
-                                            [
-                                                "arn:aws:kinesis:",
-                                                {
-                                                    "Ref" : "AWS::Region"
-                                                },
-                                                ":",
-                                                {
-                                                    "Ref" : "AWS::AccountId"
-                                                },
-                                                ":stream/%FIREHOSE_STREAM_NAME%"
-                                            ]
-                                        ]
-                                    }
-                                }
-                            }
                         }
                     ]
                 }
