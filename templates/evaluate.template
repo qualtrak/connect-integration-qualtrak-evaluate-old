@@ -350,14 +350,19 @@
             ]
         },
         "S3Bucket" : {
-            "Description" : "Please refer to http://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-instance.html#datastorage for details on how retrieve the S3 bucket associated with your Amazon Connect instance. This is the S3 bucket where Amazon Connect stores call recordings and scheduled reports.",
-            "Type" : "String"
+            "Type" : "String",
+            "MinLength" : "3",
+            "MaxLength" : "63",
+            "AllowedPattern" : "^[a-z0-9]+([0-9a-zA-Z-.]*[0-9a-z])*$",
+            "ConstraintDescription" : "Must not be empty, must begin with a letter or number and contain only alphanumeric, lowercase characters, must not end with . or -, no longer than 63 characters in length"
         },
         "S3EvaluateBucket" : {
             "Type" : "String",
-            "Description" : "The name of a new bucket that will be used to store Attachments. The actual name will become evaluate-<AccountId>-<whatever-you-enter-here>, e.g. evaluate-344201342714-myNewBucket",
-            "AllowedPattern" : "^[0-9a-zA-Z]+([0-9a-zA-Z-]*[0-9a-zA-Z])*$",
-            "ConstraintDescription" : "The bucket name can include numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen (-) "
+            "Description" : "The name of a new bucket that will be used to store Attachments. The actual name will be evaluate-<AccountId>-<whatever-you-enter-here>, e.g. evaluate-344201342714-my.new.bucket",
+            "MinLength" : "3",
+            "MaxLength" : "41",
+            "AllowedPattern" : "^[a-z0-9]+([0-9a-zA-Z-.]*[0-9a-z])*$",
+            "ConstraintDescription" : "Must not be empty, must begin with a letter or number and contain only alphanumeric, lowercase characters, must not end with . or -, no longer than 41 characters in length"
         },
         "QSS3BucketName" : {
             "AllowedPattern" : "^[0-9a-zA-Z]+([0-9a-zA-Z-]*[0-9a-zA-Z])*$",
