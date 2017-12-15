@@ -21,6 +21,41 @@
             "Type" : "String",
             "AllowedPattern" : "connect-[0-9a-f]{12}",
             "ConstraintDescription" : "Invalid S3 Bucket format. Must be in the form connect-xxxxxxxxxxxx"
+        },
+        "ESInstanceType" : {
+            "Description" : "Amazon ElasticSearch instance type",
+            "Type" : "String",
+            "Default" : "t2.medium.elasticsearch",
+            "AllowedValues" : [
+                "t2.medium.elasticsearch",
+                "m3.medium.elasticsearch",
+                "m3.large.elasticsearch",
+                "m3.xlarge.elasticsearch",
+                "m3.2xlarge.elasticsearch",
+                "m4.large.elasticsearch",
+                "m4.xlarge.elasticsearch",
+                "m4.2xlarge.elasticsearch",
+                "m4.4xlarge.elasticsearch",
+                "m4.10xlarge.elasticsearch",
+                "c4.large.elasticsearch",
+                "c4.xlarge.elasticsearch",
+                "c4.2xlarge.elasticsearch",
+                "c4.4xlarge.elasticsearch",
+                "c4.8xlarge.elasticsearch",
+                "r3.large.elasticsearch",
+                "r3.xlarge.elasticsearch",
+                "r3.2xlarge.elasticsearch",
+                "r3.4xlarge.elasticsearch",
+                "r3.8xlarge.elasticsearch",
+                "r4.large.elasticsearch",
+                "r4.xlarge.elasticsearch",
+                "r4.2xlarge.elasticsearch",
+                "r4.4xlarge.elasticsearch",
+                "r4.8xlarge.elasticsearch",
+                "r4.16xlarge.elasticsearch",
+                "i2.xlarge.elasticsearch",
+                "i2.2xlarge.elasticsearch"
+            ]
         }
     },
     "Metadata" : {
@@ -41,6 +76,7 @@
                     },
                     "Parameters" : [
                         "ESDomain",
+                        "ESInstanceType",
                         "CidrBlock"
                     ]
                 }
@@ -51,6 +87,9 @@
                 },
                 "ESDomain" : {
                     "default" : "ES Domain"
+                },
+                "ESInstanceType" : {
+                    "default" : "ES Instance Type"
                 },
                 "S3Bucket" : {
                     "default" : "S3 Bucket"
@@ -219,7 +258,7 @@
                     "DedicatedMasterEnabled" : "false",
                     "InstanceCount" : "1",
                     "ZoneAwarenessEnabled" : "false",
-                    "InstanceType" : "t2.small.elasticsearch"
+                    "InstanceType" : {"Ref" : "ESInstanceType"}
                 },
                 "EBSOptions" : {
                     "EBSEnabled" : true,
