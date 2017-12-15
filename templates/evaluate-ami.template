@@ -168,7 +168,7 @@
             "AllowedPattern" : "^[a-z0-9]+([0-9a-zA-Z-.]*[0-9a-z])*$",
             "ConstraintDescription" : "Must not be empty, must begin with a letter or number and contain only alphanumeric, lowercase characters, must not end with . or -, no longer than 41 characters in length"
         },
-        "webXface" : {
+        "WebXface" : {
             "Type" : "String"
         },
         "ElasticIp" : {
@@ -900,7 +900,7 @@
                 "NetworkInterfaces" : [
                     {
                         "NetworkInterfaceId" : {
-                            "Ref" : "webXface"
+                            "Ref" : "WebXface"
                         },
                         "DeviceIndex" : "0"
                     }

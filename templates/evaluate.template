@@ -423,7 +423,7 @@
                     "S3EvaluateBucket" : {
                         "Ref" : "S3EvaluateBucket"
                     },
-                    "webXface" : {
+                    "WebXface" : {
                         "Fn::GetAtt" : [
                             "amisecuritystack",
                             "Outputs.WebXFace"
