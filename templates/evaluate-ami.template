@@ -287,15 +287,15 @@
         }
     },
     "Mappings" : {
-        "AWSRegionAMI" : {
+        "AWSAMIRegionMap" : {
             "us-east-1" : {
-                "Windows2016AMI" : "ami-73fd2d09"
+                "e4ac-1.0.0-20171017" : "ami-73fd2d09"
             },
             "eu-central-1" : {
-                "Windows2016AMI" : "ami-10e45d7f"
+                "e4ac-1.0.0-20171017" : "ami-10e45d7f"
             },
             "ap-southeast-2" : {
-                "Windows2016AMI" : "ami-c503eea7"
+                "e4ac-1.0.0-20171017" : "ami-c503eea7"
             }
         }
     },
@@ -835,11 +835,11 @@
                 ],
                 "ImageId" : {
                     "Fn::FindInMap" : [
-                        "AWSRegionAMI",
+                        "AWSAMIRegionMap",
                         {
                             "Ref" : "AWS::Region"
                         },
-                        "Windows2016AMI"
+                        "e4ac-1.0.0-20171017"
                     ]
                 },
                 "InstanceType" : {
