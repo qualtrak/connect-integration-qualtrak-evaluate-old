@@ -383,8 +383,8 @@
         "amisecuritystack" : {
             "Type" : "AWS::CloudFormation::Stack",
             "Properties" : {
-                "TemplateURL" : {
-                    "Fn::Sub" : "https://qualtrak-aws.s3.amazonaws.com/e4ac/templates/evaluate-ami-security.template"
+                "TemplateURL" : {                    
+                    "Fn::Sub" : "https://${QSS3BucketName}.s3.amazonaws.com/${QSS3KeyPrefix}templates/evaluate-ami-security.template"
                 },
                 "Parameters" : {
                     "RDPFrom" : {
@@ -403,8 +403,8 @@
             "DependsOn" : "connectstack",
             "Type" : "AWS::CloudFormation::Stack",
             "Properties" : {
-                "TemplateURL" : {
-                    "Fn::Sub" : "https://qualtrak-aws.s3.amazonaws.com/e4ac/templates/evaluate-ami.template"
+                "TemplateURL" : {                    
+                    "Fn::Sub" : "https://${QSS3BucketName}.s3.amazonaws.com/${QSS3KeyPrefix}templates/evaluate-ami.template"
                 },
                 "Parameters" : {
                     "KeyName" : {
@@ -478,6 +478,12 @@
                             "amisecuritystack",
                             "Outputs.ElasticIp"
                         ]
+                    },
+                    "QSS3BucketName" : {
+                        "Ref" : "QSS3BucketName"
+                    },
+                    "QSS3KeyPrefix" : {
+                        "Ref" : "QSS3KeyPrefix"
                     }
                 }
             }
@@ -486,8 +492,8 @@
             "Type" : "AWS::CloudFormation::Stack",
             "DependsOn" : "amisecuritystack",
             "Properties" : {
-                "TemplateURL" : {
-                    "Fn::Sub" : "https://qualtrak-aws.s3.amazonaws.com/e4ac/templates/evaluate-amazonconnect.template"
+                "TemplateURL" : {                   
+                    "Fn::Sub" : "https://${QSS3BucketName}.s3.amazonaws.com/${QSS3KeyPrefix}templates/evaluate-amazonconnect.template"
                 },
                 "Parameters" : {
                     "KinesisStream" : {

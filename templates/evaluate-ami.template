@@ -173,6 +173,12 @@
         },
         "ElasticIp" : {
             "Type" : "String"
+        },
+        "QSS3BucketName" : {
+            "Type" : "String"
+        },
+        "QSS3KeyPrefix" : {
+            "Type" : "String"
         }
     },
     "Metadata" : {
@@ -571,187 +577,26 @@
                                 }
                             },
                             "c:\\cfn\\scripts\\install-environment-variables.ps1" : {
-                                "content" : {
-                                    "Fn::Join" : [
-                                        "",
-                                        [
-                                            "### Create environment variables...\n",
-                                            "[Environment]::SetEnvironmentVariable(\"q-connect-s3\", \"",
-                                            {
-                                                "Ref" : "S3Bucket"
-                                            },
-                                            "\", \"Machine\")\n",
-                                            "[Environment]::SetEnvironmentVariable(\"q-evaluate-s3\", \"",
-                                            {
-                                                "Fn::If" : [
-                                                    "RetainEvaluateS3",
-                                                    {
-                                                        "Ref" : "S3BucketNameEvaluateRetain"
-                                                    },
-                                                    {
-                                                        "Ref" : "S3BucketNameEvaluateDelete"
-                                                    }
-                                                ]
-                                            },
-                                            "\", \"Machine\")\n",
-                                            "[Environment]::SetEnvironmentVariable(\"q-dns\", \"",
-                                            {
-                                                "Ref" : "ElasticIp"
-                                            },
-                                            "\", \"Machine\")\n",
-                                            "[Environment]::SetEnvironmentVariable(\"q-db-sys-username\", \"",
-                                            {
-                                                "Ref" : "DBAdminUser"
-                                            },
-                                            "\", \"Machine\")\n",
-                                            "c:\\temp\\EncryptPassAndSetAsEnvVar.ps1 -Var q-db-sys-password -Value ",
-                                            {
-                                                "Ref" : "DBAdminPassword"
-                                            },
-                                            "\n",
-                                            "[Environment]::SetEnvironmentVariable(\"q-db-username\", \"",
-                                            {
-                                                "Ref" : "DBEvaluateUser"
-                                            },
-                                            "\", \"Machine\")\n",
-                                            "c:\\temp\\EncryptPassAndSetAsEnvVar.ps1 -Var q-db-password -Value ",
-                                            {
-                                                "Ref" : "DBEvaluatePassword"
-                                            },
-                                            "\n",
-                                            "[Environment]::SetEnvironmentVariable(\"q-db-dns\", \"",
-                                            {
-                                                "Fn::GetAtt" : [
-                                                    "SqlExpress",
-                                                    "Endpoint.Address"
-                                                ]
-                                            },
-                                            "\", \"Machine\")\n",
-                                            "[Environment]::SetEnvironmentVariable(\"q-sku\", \"E4AC\", \"Machine\")\n",
-                                            "[Environment]::SetEnvironmentVariable(\"q-db-port\", \"",
-                                            {
-                                                "Fn::GetAtt" : [
-                                                    "SqlExpress",
-                                                    "Endpoint.Port"
-                                                ]
-                                            },
-                                            "\", \"Machine\")\n",
-                                            "[Environment]::SetEnvironmentVariable(\"q-account-id\", \"",
-                                            {
-                                                "Ref" : "AWS::AccountId"
-                                            },
-                                            "\", \"Machine\")\n",
-                                            "[Environment]::SetEnvironmentVariable(\"q-region\", \"",
-                                            {
-                                                "Ref" : "AWS::Region"
-                                            },
-                                            "\", \"Machine\")\n",
-                                            "[Environment]::SetEnvironmentVariable(\"q-version\", \"1.0\", \"Machine\")\n",
-                                            "[Environment]::SetEnvironmentVariable(\"q-product-name\", \"Evaluate for Amazon Connect\", \"Machine\")\n",
-                                            "[Environment]::SetEnvironmentVariable(\"q-root-path\", \"evaluate\", \"Machine\")\n",
-                                            "[Environment]::SetEnvironmentVariable(\"q-ad-domain\", \"",
-                                            {
-                                                "Ref" : "DomainDNSName"
-                                            },
-                                            "\", \"Machine\")\n",
-                                            "[Environment]::SetEnvironmentVariable(\"q-es-url\", \"",
-                                            {
-                                                "Ref" : "ESDomain"
-                                            },
-                                            "\", \"Machine\")\n",
-                                            "[Environment]::SetEnvironmentVariable(\"q-deployment-id\", \"",
-                                            "$([guid]::NewGuid().Guid)",
-                                            "\", \"Machine\")\n",
-                                            "$adDomain = \"",
-                                            {
-                                                "Ref" : "DomainDNSName"
-                                            },
-                                            "\" \n",
-                                            "$adDomain = [environment]::GetEnvironmentVariable(\"q-ad-domain\", \"Machine\") \n",
-                                            "$adList = $adDomain -Split \".\", 0, \"simplematch\"  \n",
-                                            "If (($adList.Count -lt 2) -or ($adList.Count -gt 6)) { \n",
-                                            "    Write-Error \"Domain: '$adDomain' must be at least 'domainname.tld' or supports up to 6 DC's e.g. 'dc6.dc5.dc4.dc3.dc2.dc1\"  \n",
-                                            "} Else { \n",
-                                            "    [array]::Reverse($adList) \n",
-                                            "    $output = \"\" \n",
-                                            "    for ($i=0; $i -lt $adList.Length; $i++) { \n",
-                                            "       $key = \"q-ad-part-$($i + 1)\" \n",
-                                            "       $value = $adList[$i] \n",
-                                            "       [Environment]::SetEnvironmentVariable(\"$key\", \"$value\" , \"Machine\") \n",
-                                            "       Write-Host \"Key: '$key', Value = '$value'\" \n",
-                                            "       $output = \"DC=$($value),$($output)\"  \n",
-                                            "    } \n",
-                                            " \n",
-                                            "    Write-Host $output.Substring(0, $output.Length - 1) \n",
-                                            "} \n",
-                                            "\n"
-                                        ]
+                                "source" : {
+                                    "Fn::Sub" : [
+                                        "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}scripts/install-environment-variables.ps1",
+                                        {
+                                            "QSS3Region": { "Ref" : "AWS::Region" }
+                                        }
                                     ]
-                                }
+                                },
+                                "authentication": "S3AccessCreds"
                             },
                             "c:\\cfn\\scripts\\install-join-ad.ps1" : {
-                                "content" : {
-                                    "Fn::Join" : [
-                                        "",
-                                        [
-                                            "### Join the domain...\n",
-                                            "$computer = Get-WmiObject -Class Win32_ComputerSystem \n",
-                                            "if ($computer.domain -eq 'WORKGROUP') { \n",
-                                            "  $adapter = Get-NetAdapter -Name 'Ethernet*'\n",
-                                            "  Set-DNSClientServerAddress -InterfaceAlias $adapter.Name -ServerAddresses ('",
-                                            {
-                                                "Fn::Select" : [
-                                                    "0",
-                                                    {
-                                                        "Fn::Split" : [
-                                                            ",",
-                                                            {
-                                                                "Ref" : "DomainIPs"
-                                                            }
-                                                        ]
-                                                    }
-                                                ]
-                                            },
-                                            "','",
-                                            {
-                                                "Fn::Select" : [
-                                                    "1",
-                                                    {
-                                                        "Fn::Split" : [
-                                                            ",",
-                                                            {
-                                                                "Ref" : "DomainIPs"
-                                                            }
-                                                        ]
-                                                    }
-                                                ]
-                                            },
-                                            "')\n",
-                                            "  $domain = '",
-                                            {
-                                                "Ref" : "DomainDNSName"
-                                            },
-                                            "'\n",
-                                            "  $password = '",
-                                            {
-                                                "Ref" : "DomainAdminPassword"
-                                            },
-                                            "' | ConvertTo-SecureString -asPlainText -Force \n",
-                                            "  $Administrator = '",
-                                            {
-                                                "Ref" : "DomainNetBiosName"
-                                            },
-                                            "\\",
-                                            {
-                                                "Ref" : "DomainAdminUser"
-                                            },
-                                            "'\n",
-                                            "  $credential = New-Object System.Management.Automation.PSCredential($Administrator,$password) \n",
-                                            "  Add-Computer -DomainName $domain -Credential $credential -restart \n",
-                                            "}\n"
-                                        ]
+                                "source" : {
+                                    "Fn::Sub" : [
+                                        "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}scripts/install-join-ad.ps1",
+                                        {
+                                            "QSS3Region": { "Ref" : "AWS::Region" }
+                                        }
                                     ]
-                                }
+                                },
+                                "authentication": "S3AccessCreds"
                             }
                         },
                         "commands" : {
@@ -760,7 +605,21 @@
                                     "Fn::Join" : [
                                         "",
                                         [
-                                            "powershell.exe -ExecutionPolicy RemoteSigned -Command c:\\cfn\\scripts\\install-environment-variables.ps1 \n"
+                                            "powershell.exe -ExecutionPolicy RemoteSigned -Command c:\\cfn\\scripts\\install-environment-variables.ps1 ",
+                                            " -bucket ", {"Ref" : "S3Bucket"},
+                                            " -attachmentBucket ", {"Fn::If" : ["RetainEvaluateS3",{"Ref" : "S3BucketNameEvaluateRetain"},{"Ref" : "S3BucketNameEvaluateDelete"}]},
+                                            " -dns ", {"Ref" : "ElasticIp"},
+                                            " -dbAdminUser ", {"Ref" : "DBAdminUser"},
+                                            " -dbAdminPassword ", {"Ref" : "DBAdminPassword"},
+                                            " -dbUser ", {"Ref" : "DBEvaluateUser"},
+                                            " -dbUserPassword ", {"Ref" : "DBEvaluatePassword"},
+                                            " -dbDns ", {"Fn::GetAtt" : ["SqlExpress","Endpoint.Address"]},
+                                            " -dbPort ", { "Fn::GetAtt" : ["SqlExpress","Endpoint.Port"]},
+                                            " -accountId ", {"Ref" : "AWS::AccountId"},
+                                            " -region ", {"Ref" : "AWS::Region"},
+                                            " -adDomain ", {"Ref" : "DomainDNSName"},
+                                            " -esUrl ", {"Ref" : "ESDomain"}, 
+                                            "\n"                                            
                                         ]
                                     ]
                                 },
@@ -804,7 +663,13 @@
                                     "Fn::Join" : [
                                         "",
                                         [
-                                            "powershell.exe -ExecutionPolicy RemoteSigned -Command c:\\cfn\\scripts\\install-join-ad.ps1 \n"
+                                            "powershell.exe -ExecutionPolicy RemoteSigned -Command c:\\cfn\\scripts\\install-join-ad.ps1",
+                                            " -ip1 ", {"Fn::Select" : ["0",{"Fn::Split" : [",",{"Ref" : "DomainIPs"}]}]},
+                                            " -ip2 ", {"Fn::Select" : ["1",{"Fn::Split" : [",",{"Ref" : "DomainIPs"}]}]},
+                                            " -adDomain ", {"Ref" : "DomainDNSName"},
+                                            " -adAdminUser ", {"Ref" : "DomainNetBiosName"}, "\\", {"Ref" : "DomainAdminUser"},
+                                            " -adAdminPassword ", {"Ref" : "DomainAdminPassword"},
+                                            "\n"
                                         ]
                                     ]
                                 },
