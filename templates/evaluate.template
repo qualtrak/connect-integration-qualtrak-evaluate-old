@@ -505,7 +505,7 @@
                     "ESInstanceType" : {
                         "Ref" : "ESInstanceType"
                     },
-                    "cidrBlock" : {
+                    "CidrBlock" : {
                         "Fn::Join" : [
                             "",
                             [

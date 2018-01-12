@@ -138,7 +138,7 @@
                 "Ref" : "WebPortAddress"
             }
         },
-        "WebXface" : {
+        "WebXFace" : {
             "Value" : {
                 "Ref" : "WebXface"
             }
