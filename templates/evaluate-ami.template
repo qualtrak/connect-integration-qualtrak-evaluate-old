@@ -1,32 +1,32 @@
 {
     "AWSTemplateFormatVersion" : "2010-09-09",
-    "Description"              : "This template creates an EC2 instance, an MSSQL Express Edition RDS instance and an S3 Bucket",
-    "Parameters"               : {
+    "Description" : "This template creates an EC2 instance, an MSSQL Express Edition RDS instance and an S3 Bucket",
+    "Parameters" : {
         "RetainEvaluateS3" : {
             "Description" : "After you have deleted this Stack, do you want to retain or delete the Evaluate S3 where all your Evaluation Attachments are stored?",
-            "Default"     : "No",
-            "Type"        : "String",
+            "Default" : "No",
+            "Type" : "String",
             "AllowedValues" : [
                 "Yes",
                 "No"
             ],
             "ConstraintDescription" : "must specify Yes or No."
         },
-        "RDPFrom"          : {
+        "RDPFrom" : {
             "Description" : "Lockdown RDP access to EC2 instance from valid IPv4 address, e.g. 201.0.1.3/19",
-            "Type"        : "String",           
+            "Type" : "String",
             "AllowedPattern" : "^(2[0-4]\\d|25[0-5]|1?\\d?\\d)(?:\\.(1?[0-9]{1,2})){3}\\/([1-9]|1[0-9]|2[0-9]|3[0-2])$",
             "ConstraintDescription" : "Must not be empty, must be valid IPv4 address with valid Mask Bit from 1-32, format of x.x.x.x/x"
         },
-        "KeyName"          : {
+        "KeyName" : {
             "Description" : "Name of an existing EC2 KeyPair",
-            "Type"        : "AWS::EC2::KeyPair::KeyName",
+            "Type" : "AWS::EC2::KeyPair::KeyName",
             "ConstraintDescription" : "must be the name of an existing EC2 KeyPair"
         },
-        "InstanceType"     : {
+        "InstanceType" : {
             "Description" : "Amazon EC2 instance type",
-            "Type"        : "String",
-            "Default"     : "m4.large",
+            "Type" : "String",
+            "Default" : "m4.large",
             "AllowedValues" : [
                 "t2.medium",
                 "m1.small",
@@ -79,100 +79,110 @@
             ],
             "ConstraintDescription" : "must be a valid EC2 instance type."
         },
-        "DomainDNSName"    : {
+        "DomainDNSName" : {
             "Description" : "Fully qualified domain name (FQDN) of the forest root domain e.g. corp.example.com",
-            "Type"        : "String",
-            "MaxLength"   : "253",
+            "Type" : "String",
+            "MaxLength" : "253",
             "AllowedPattern" : "(?=^.{4,253}$)(^((?!-)[a-zA-Z0-9-]{1,63}(?<!-)\\.)+[a-zA-Z]{2,63}\\.?$)",
             "ConstraintDescription" : "Must not be empty, allowed ASCII letters, case insensitive, digits, hyphens ('-'), labels, cannot start or end with a hyphen, trailings dots are allowed, labels can start with numbers, max length of hostname is 253 characters, underscores are not allowed"
         },
-        "DBEvaluateUser"   : {
-            "NoEcho"  : "false",
+        "DBEvaluateUser" : {
+            "NoEcho" : "false",
             "Description" : "The database non-admin account username",
-            "Type"        : "String",
-            "MinLength"   : "1",
-            "MaxLength"   : "16",
+            "Type" : "String",
+            "MinLength" : "1",
+            "MaxLength" : "16",
             "AllowedPattern" : "[a-zA-Z][a-zA-Z0-9]*",
             "ConstraintDescription" : "Must begin with a letter and contain only alphanumeric characters"
         },
         "DBEvaluatePassword" : {
-            "NoEcho"  : "true",
-            "Description" : "Password must contain 8 to 64 printable ASCII characters excluding \/, \", ', \\, and @. It must contain 1 uppercase letter, 1 lowercase letter, and 1 number.",
-            "Type"        : "String",
-            "MinLength"   : "8",
-            "MaxLength"   : "64",
-            "AllowedPattern" : "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?!.*[@\/\"']).*$",
+            "NoEcho" : "true",
+            "Description" : "Password must contain 8 to 64 printable ASCII characters excluding /, \", ', \\, and @. It must contain 1 uppercase letter, 1 lowercase letter, and 1 number.",
+            "Type" : "String",
+            "MinLength" : "8",
+            "MaxLength" : "64",
+            "AllowedPattern" : "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?!.*[@/\"']).*$",
             "ConstraintDescription" : " Password does not meet complexity requirements"
         },
-        "DomainIPs"          : {
-            "NoEcho"  : "false",
+        "DomainIPs" : {
+            "NoEcho" : "false",
             "Description" : "A comma separated list of DNS IP addresses for the AD Domain",
-            "Type"        : "String",
+            "Type" : "String",
             "AllowedPattern" : "^(2[0-4]\\d|25[0-5]|1?\\d?\\d)(?:\\.(1?[0-9]{1,2})){3},(2[0-4]\\d|25[0-5]|1?\\d?\\d)(?:\\.(1?[0-9]{1,2})){3}$",
             "ConstraintDescription" : "Must be 2 valid IPv4 addresses separated by a ',' with no white spaces. e.g. 11.0.2.10,11.0.3.10"
         },
-        "DomainAdminUser"    : {
+        "DomainAdminUser" : {
             "Description" : "User name for the account that will be added as Domain Administrator. This is separate from the default \"EC2 Administrator\" account",
-            "Type"        : "String"
+            "Type" : "String"
         },
         "DomainAdminPassword" : {
-            "NoEcho"  : "true",
+            "NoEcho" : "true",
             "Description" : "Password of the Domain Administrator's account. This is separate from the default \"EC2 Administrator\" account",
-            "Type"        : "String"
+            "Type" : "String"
         },
-        "DomainNetBiosName"   : {
+        "DomainNetBiosName" : {
             "Description" : "Netbios name for the domain, e.g. MYCOMPANY",
-            "Type"        : "String"
+            "Type" : "String"
         },
-        "VpcId"               : {
+        "VpcId" : {
             "Description" : "VPC Id",
-            "Type"        : "AWS::EC2::VPC::Id"
+            "Type" : "AWS::EC2::VPC::Id"
         },
-        "SubnetId"            : {
+        "SubnetId" : {
             "Description" : "Subnet Id, must be same CIDR that was supplied when ElasticSearch was deployed",
-            "Type"        : "AWS::EC2::Subnet::Id"
+            "Type" : "AWS::EC2::Subnet::Id"
         },
-        "DBAdminUser"         : {
-            "NoEcho"  : "false",
+        "DBAdminUser" : {
+            "NoEcho" : "false",
             "Description" : "The database admin account username",
-            "Type"        : "String",
-            "MinLength"   : "1",
-            "MaxLength"   : "16",
+            "Type" : "String",
+            "MinLength" : "1",
+            "MaxLength" : "16",
             "AllowedPattern" : "[a-zA-Z][a-zA-Z0-9]*",
             "ConstraintDescription" : "must begin with a letter and contain only alphanumeric characters"
         },
-        "DBAdminPassword"     : {
-            "NoEcho"  : "true",
-            "Description" : "Password must contain 8 to 64 printable ASCII characters excluding \/, \", ', \\, and @. It must contain 1 uppercase letter, 1 lowercase letter, and 1 number.",
-            "Type"        : "String",
-            "MinLength"   : "8",
-            "MaxLength"   : "64",
-            "AllowedPattern" : "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?!.*[@\/\"']).*$",
+        "DBAdminPassword" : {
+            "NoEcho" : "true",
+            "Description" : "Password must contain 8 to 64 printable ASCII characters excluding /, \", ', \\, and @. It must contain 1 uppercase letter, 1 lowercase letter, and 1 number.",
+            "Type" : "String",
+            "MinLength" : "8",
+            "MaxLength" : "64",
+            "AllowedPattern" : "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?!.*[@/\"']).*$",
             "ConstraintDescription" : "Password does not meet complexity requirements"
         },
         "S3Bucket" : {
-            "Type" : "String"
+            "Type" : "String",
+            "MinLength" : "3",
+            "MaxLength" : "63",
+            "AllowedPattern" : "^[a-z0-9]+([0-9a-zA-Z-.]*[0-9a-z])*$",
+            "ConstraintDescription" : "Must not be empty, must begin with a letter or number and contain only alphanumeric, lowercase characters, must not end with . or -, no longer than 63 characters in length"
         },
         "ESDomain" : {
             "Type" : "String"
         },
         "S3EvaluateBucket" : {
             "Type" : "String",
-            "Description" : "The name of a new bucket that will be used to store Attachments. The actual name will be evaluate-<AccountId>-<whatever-you-enter-here>, e.g. evaluate-344201342714-myNewBucket",
-            "MinLength"   : "8",
-            "MaxLength"   : "41",
-            "AllowedPattern" : "[a-z0-9].*",
-            "ConstraintDescription" : "Must not be empty, must begin with a letter and contain only alphanumeric, lowercase characters"
+            "Description" : "The name of a new bucket that will be used to store Attachments. The actual name will be evaluate-<AccountId>-<whatever-you-enter-here>, e.g. evaluate-344201342714-my.new.bucket",
+            "MinLength" : "3",
+            "MaxLength" : "41",
+            "AllowedPattern" : "^[a-z0-9]+([0-9a-zA-Z-.]*[0-9a-z])*$",
+            "ConstraintDescription" : "Must not be empty, must begin with a letter or number and contain only alphanumeric, lowercase characters, must not end with . or -, no longer than 41 characters in length"
         },
-        "webXface" : {
+        "WebXface" : {
             "Type" : "String"
         },
         "ElasticIp" : {
             "Type" : "String"
+        },
+        "QSS3BucketName" : {
+            "Type" : "String"
+        },
+        "QSS3KeyPrefix" : {
+            "Type" : "String"
         }
     },
-    "Metadata"                 : {     
-        "AWS::CloudFormation::Interface" : {		  		 
+    "Metadata" : {
+        "AWS::CloudFormation::Interface" : {
             "ParameterGroups" : [
                 {
                     "Label" : {
@@ -201,7 +211,7 @@
                     "Label" : {
                         "default" : "S3 Configuration"
                     },
-                    "Parameters" : [                      
+                    "Parameters" : [
                         "RetainEvaluateS3",
                         "S3EvaluateBucket"
                     ]
@@ -218,57 +228,57 @@
                         "DomainNetBiosName"
                     ]
                 }
-            ],			 
+            ],
             "ParameterLabels" : {
                 "KeyName" : {
-                    "default" : "Which Key should be used?"
+                    "default" : "Key Name"
                 },
                 "InstanceType" : {
-                    "default" : "What EC2 size should be used?"
+                    "default" : "Instance Type"
                 },
-                "VpcId"        : {
-                    "default" : "Which VPC should this be deployed to?"
+                "VpcId" : {
+                    "default" : "Vpc Id"
                 },
-                "RDPFrom"      : {
-                    "default" : "RDP from"
+                "RDPFrom": {
+                    "default" : "RDP From"
                 },
-                "ESDomain"  : {
-                    "default" : "What is the endpoint of ElasticSearch?"
-                },               
+                "ESDomain" : {
+                    "default" : "ES Domain"
+                },
                 "RetainEvaluateS3" : {
-                    "default" : "Retain Evaluate S3?"
+                    "default" : "Retain Evaluate S3"
                 },
-                "DBEvaluateUser"   : {
-                    "default" : "Application database username"
+                "DBEvaluateUser" : {
+                    "default" : "DB Evaluate User"
                 },
                 "DBEvaluatePassword" : {
-                    "default" : "Application database password"
+                    "default" : "DB Evaluate Password"
                 },
-                "DBAdminUser"        : {
-                    "default" : "Application database master username"
+                "DBAdminUser" : {
+                    "default" : "DB Admin User"
                 },
-                "DBAdminPassword"    : {
-                    "default" : "Application database master password"
+                "DBAdminPassword" : {
+                    "default" : "DB Admin Password"
                 },
-                "DomainDNSName"      : {
-                    "default" : "Domain DNS"
+                "DomainDNSName" : {
+                    "default" : "Domain DNS Name"
                 },
-                "DomainIPs"          : {
+                "DomainIPs" : {
                     "default" : "Domain IPs"
                 },
-                "DomainAdminUser"    : {
-                    "default" : "Domain Administrator username"
+                "DomainAdminUser" : {
+                    "default" : "Domain Admin User"
                 },
                 "DomainAdminPassword" : {
-                    "default" : "Domain Administrator password"
+                    "default" : "Domain Admin Password"
                 },
                 "S3EvaluateBucket" : {
-                    "default" : "Name of new bucket"
+                    "default" : "S3 Evaluate Bucket"
                 }
             }
         }
     },
-    "Conditions"               : {
+    "Conditions" : {
         "RetainEvaluateS3" : {
             "Fn::Equals" : [
                 {
@@ -286,24 +296,24 @@
             ]
         }
     },
-    "Mappings"                 : {
-        "AWSRegion2AMI" : {
+    "Mappings" : {
+        "AWSAMIRegionMap" : {
             "us-east-1" : {
-                "Windows2016DevAMI" : "ami-bb43f2c1"
+                "WS2016R2V1" : "ami-73fd2d09"
             },
             "eu-central-1" : {
-                "Windows2016DevAMI" : "ami-bb43f2c1"
+                "WS2016R2V1" : "ami-10e45d7f"
             },
             "ap-southeast-2" : {
-                "Windows2016DevAMI" : "ami-bb43f2c1"
+                "WS2016R2V1" : "ami-c503eea7"
             }
         }
     },
-    "Resources"                : {
-        "sqlExpress" : {
+    "Resources" : {
+        "SqlExpress" : {
             "Type" : "AWS::RDS::DBInstance",
             "DeletionPolicy" : "Snapshot",
-            "Properties"     : {
+            "Properties" : {
                 "Tags" : [
                     {
                         "Key" : "APP-NAME",
@@ -319,10 +329,10 @@
                     }
                 ],
                 "AllocatedStorage" : "100",
-                "DBInstanceClass"  : "db.t2.medium",
-                "Engine"           : "sqlserver-ex",
-                "Iops"             : "1000",
-                "MasterUsername"   : {
+                "DBInstanceClass" : "db.t2.medium",
+                "Engine" : "sqlserver-ex",
+                "Iops" : "1000",
+                "MasterUsername" : {
                     "Ref" : "DBAdminUser"
                 },
                 "MasterUserPassword" : {
@@ -330,8 +340,8 @@
                 },
                 "BackupRetentionPeriod" : "0"
             }
-        },        
-        "rootRole"         : {
+        },
+        "RootRole" : {
             "Type" : "AWS::IAM::Role",
             "Properties" : {
                 "AssumeRolePolicyDocument" : {
@@ -344,27 +354,27 @@
                                     "ec2.amazonaws.com"
                                 ]
                             },
-                            "Action"    : [
+                            "Action" : [
                                 "sts:AssumeRole"
                             ]
                         }
                     ]
                 },
-                "Policies"                 : [
+                "Policies" : [
                     {
                         "PolicyName" : {
                             "Fn::Join" : [
                                 "",
                                 [
                                     "root-",
-									{
+                                    {
                                         "Ref" : "AWS::AccountId"
                                     },
-									"-",
+                                    "-",
                                     {
                                         "Ref" : "AWS::StackName"
                                     },
-									"-",
+                                    "-",
                                     {
                                         "Ref" : "AWS::Region"
                                     }
@@ -373,17 +383,7 @@
                         },
                         "PolicyDocument" : {
                             "Version" : "2012-10-17",
-                            "Statement" : [
-                                {
-                                    "Effect" : "Allow",
-                                    "Action" : "*",
-                                    "Resource" : "*"
-                                },
-                                {
-                                    "Effect" : "Allow",
-                                    "Action" : "s3:*",
-                                    "Resource" : "*"
-                                },
+                            "Statement" : [ 
                                 {
                                     "Effect" : "Allow",
                                     "Action" : "s3:ListBucket",
@@ -424,7 +424,10 @@
                                     "Effect" : "Allow",
                                     "Action" : [
                                         "s3:GetObject",
-                                        "s3:PutObject"
+                                        "s3:PutObject",
+                                        "s3:DeleteObject",
+                                        "logs:CreateLogStream",
+                                        "logs:PutLogEvents"
                                     ],
                                     "Resource" : [
                                         {
@@ -452,7 +455,9 @@
                                 {
                                     "Effect" : "Allow",
                                     "Action" : [
-                                        "s3:GetObject"
+                                        "s3:GetObject",
+                                        "logs:CreateLogStream",
+                                        "logs:PutLogEvents"
                                     ],
                                     "Resource" : [
                                         {
@@ -470,12 +475,36 @@
                                     ]
                                 },
                                 {
-                                    "Effect" : "Allow",
-                                    "Action" : [
-                                        "logs:CreateLogStream",
-                                        "logs:PutLogEvents"
+                                    "Effect": "Allow",                                   
+                                    "Action": [
+                                      "es:DescribeElasticsearchDomain",
+                                      "es:DescribeElasticsearchDomainConfig",
+                                      "es:ESHttpGet",
+                                      "es:ESHttpHead",
+                                      "es:ListTags"
                                     ],
-                                    "Resource" : "*"
+                                    "Resource": [
+                                        {
+                                            "Fn::Join" : [
+                                                "",
+                                                [
+                                                    "arn:aws:es:",
+                                                    {
+                                                        "Ref" : "AWS::Region"
+                                                    },
+                                                    ":",
+                                                    {
+                                                        "Ref" : "AWS::AccountId"
+                                                    },
+                                                    ":domain/",
+                                                    {
+                                                        "Ref" : "ESDomain"
+                                                    },
+                                                    "/*"
+                                                ]
+                                            ]
+                                        }
+                                    ]
                                 }
                             ]
                         }
@@ -483,18 +512,18 @@
                 ]
             }
         },
-        "rootInstanceProfile" : {
+        "RootInstanceProfile" : {
             "Type" : "AWS::IAM::InstanceProfile",
             "Properties" : {
                 "Path" : "/",
                 "Roles" : [
                     {
-                        "Ref" : "rootRole"
+                        "Ref" : "RootRole"
                     }
                 ]
             }
         },
-        "windowsServer"       : {
+        "WindowsServer" : {
             "Type" : "AWS::EC2::Instance",
             "Metadata" : {
                 "AWS::CloudFormation::Init" : {
@@ -527,12 +556,12 @@
                                         [
                                             "[cfn-auto-reloader-hook]\n",
                                             "triggers=post.update\n",
-                                            "path=Resources.windowsServer.Metadata.AWS::CloudFormation::Init\n",
+                                            "path=Resources.WindowsServer.Metadata.AWS::CloudFormation::Init\n",
                                             "action=cfn-init.exe -v -s ",
                                             {
                                                 "Ref" : "AWS::StackName"
                                             },
-                                            " -r windowsServer",
+                                            " -r WindowsServer",
                                             " --region ",
                                             {
                                                 "Ref" : "AWS::Region"
@@ -543,187 +572,16 @@
                                 }
                             },
                             "c:\\cfn\\scripts\\install-environment-variables.ps1" : {
-                                "content" : {
-                                    "Fn::Join" : [
-                                        "",
-                                        [
-                                            "### Create environment variables...\n",
-                                            "[Environment]::SetEnvironmentVariable(\"q-connect-s3\", \"",
-                                            {
-                                                "Ref" : "S3Bucket"
-                                            },
-                                            "\", \"Machine\")\n",
-                                            "[Environment]::SetEnvironmentVariable(\"q-evaluate-s3\", \"",
-                                            {
-                                                "Fn::If" : [
-                                                    "RetainEvaluateS3",
-                                                    {
-                                                        "Ref" : "S3BucketNameEvaluateRetain"
-                                                    },
-                                                    {
-                                                        "Ref" : "S3BucketNameEvaluateDelete"
-                                                    }
-                                                ]
-                                            },
-                                            "\", \"Machine\")\n",
-                                            "[Environment]::SetEnvironmentVariable(\"q-dns\", \"",
-                                            {
-                                                "Ref" : "ElasticIp"
-                                            },
-                                            "\", \"Machine\")\n",
-                                            "[Environment]::SetEnvironmentVariable(\"q-db-sys-username\", \"",
-                                            {
-                                                "Ref" : "DBAdminUser"
-                                            },
-                                            "\", \"Machine\")\n",
-                                            "c:\\temp\\EncryptPassAndSetAsEnvVar.ps1 -Var q-db-sys-password -Value ",
-                                            {
-                                                "Ref" : "DBAdminPassword"
-                                            },
-                                            "\n",
-                                            "[Environment]::SetEnvironmentVariable(\"q-db-username\", \"",
-                                            {
-                                                "Ref" : "DBEvaluateUser"
-                                            },
-                                            "\", \"Machine\")\n",
-                                            "c:\\temp\\EncryptPassAndSetAsEnvVar.ps1 -Var q-db-password -Value ",
-                                            {
-                                                "Ref" : "DBEvaluatePassword"
-                                            },
-                                            "\n",
-                                            "[Environment]::SetEnvironmentVariable(\"q-db-dns\", \"",
-                                            {
-                                                "Fn::GetAtt" : [
-                                                    "sqlExpress",
-                                                    "Endpoint.Address"
-                                                ]
-                                            },
-                                            "\", \"Machine\")\n",
-                                            "[Environment]::SetEnvironmentVariable(\"q-sku\", \"E4AC\", \"Machine\")\n",
-                                            "[Environment]::SetEnvironmentVariable(\"q-db-port\", \"",
-                                            {
-                                                "Fn::GetAtt" : [
-                                                    "sqlExpress",
-                                                    "Endpoint.Port"
-                                                ]
-                                            },
-                                            "\", \"Machine\")\n",
-                                            "[Environment]::SetEnvironmentVariable(\"q-account-id\", \"",
-                                            {
-                                                "Ref" : "AWS::AccountId"
-                                            },
-                                            "\", \"Machine\")\n",
-                                            "[Environment]::SetEnvironmentVariable(\"q-region\", \"",
-                                            {
-                                                "Ref" : "AWS::Region"
-                                            },
-                                            "\", \"Machine\")\n",
-                                            "[Environment]::SetEnvironmentVariable(\"q-version\", \"1.0\", \"Machine\")\n",
-                                            "[Environment]::SetEnvironmentVariable(\"q-product-name\", \"Evaluate for Amazon Connect\", \"Machine\")\n",
-                                            "[Environment]::SetEnvironmentVariable(\"q-root-path\", \"evaluate\", \"Machine\")\n",
-                                            "[Environment]::SetEnvironmentVariable(\"q-ad-domain\", \"",
-                                            {
-                                                "Ref" : "DomainDNSName"
-                                            },
-                                            "\", \"Machine\")\n",
-                                            "[Environment]::SetEnvironmentVariable(\"q-es-url\", \"",
-                                            {                                               
-                                               "Ref" : "ESDomain"
-                                            },
-                                            "\", \"Machine\")\n",
-                                            "[Environment]::SetEnvironmentVariable(\"q-deployment-id\", \"",
-                                            "$([guid]::NewGuid().Guid)",
-                                            "\", \"Machine\")\n",
-                                            "$adDomain = \"",
-                                            {
-                                                "Ref" : "DomainDNSName"
-                                            },
-                                            "\" \n",
-                                            "$adDomain = [environment]::GetEnvironmentVariable(\"q-ad-domain\", \"Machine\") \n",
-                                            "$adList = $adDomain -Split \".\", 0, \"simplematch\"  \n",
-                                            "If (($adList.Count -lt 2) -or ($adList.Count -gt 6)) { \n",
-                                            "    Write-Error \"Domain: '$adDomain' must be at least 'domainname.tld' or supports up to 6 DC's e.g. 'dc6.dc5.dc4.dc3.dc2.dc1\"  \n",
-                                            "} Else { \n",
-                                            "    [array]::Reverse($adList) \n",
-                                            "    $output = \"\" \n",
-                                            "    for ($i=0; $i -lt $adList.Length; $i++) { \n",
-                                            "       $key = \"q-ad-part-$($i + 1)\" \n",
-                                            "       $value = $adList[$i] \n",
-                                            "       [Environment]::SetEnvironmentVariable(\"$key\", \"$value\" , \"Machine\") \n",
-                                            "       Write-Host \"Key: '$key', Value = '$value'\" \n",
-                                            "       $output = \"DC=$($value),$($output)\"  \n",
-                                            "    } \n",
-                                            " \n",
-                                            "    Write-Host $output.Substring(0, $output.Length - 1) \n",
-                                            "} \n",
-                                            "\n"
-                                        ]
-                                    ]
-                                }
+                                "source" : {
+                                    "Fn::Sub" : "https://${QSS3BucketName}.s3.amazonaws.com/${QSS3KeyPrefix}scripts/install-environment-variables.ps1"
+                                },
+                                "authentication": "S3AccessCreds"
                             },
-                            "c:\\cfn\\scripts\\install-join-ad.ps1"               : {
-                                "content" : {
-                                    "Fn::Join" : [
-                                        "",
-                                        [                                           
-                                            "### Join the domain...\n",
-                                            "$computer = Get-WmiObject -Class Win32_ComputerSystem \n",
-                                            "if ($computer.domain -eq 'WORKGROUP') { \n",
-                                            "  $adapter = Get-NetAdapter -Name 'Ethernet*'\n",
-                                            "  Set-DNSClientServerAddress -InterfaceAlias $adapter.Name -ServerAddresses ('",
-                                            {
-                                                "Fn::Select" : [
-                                                    "0",
-                                                    {
-                                                        "Fn::Split" : [
-                                                            ",",
-                                                            {
-                                                                "Ref" : "DomainIPs"
-                                                            }
-                                                        ]
-                                                    }
-                                                ]
-                                            },
-                                            "','",
-                                            {
-                                                "Fn::Select" : [
-                                                    "1",
-                                                    {
-                                                        "Fn::Split" : [
-                                                            ",",
-                                                            {
-                                                                "Ref" : "DomainIPs"
-                                                            }
-                                                        ]
-                                                    }
-                                                ]
-                                            },
-                                            "')\n",
-                                            "  $domain = '",
-                                            {
-                                                "Ref" : "DomainDNSName"
-                                            },
-                                            "'\n",
-                                            "  $password = '",
-                                            {
-                                                "Ref" : "DomainAdminPassword"
-                                            },
-                                            "' | ConvertTo-SecureString -asPlainText -Force \n",
-                                            "  $Administrator = '",
-                                            {
-                                                "Ref" : "DomainNetBiosName"
-                                            },
-                                            "\\",
-                                            {
-                                                "Ref" : "DomainAdminUser"
-                                            },
-                                            "'\n",
-                                            "  $credential = New-Object System.Management.Automation.PSCredential($Administrator,$password) \n",
-                                            "  Add-Computer -DomainName $domain -Credential $credential -restart \n",
-                                            "}\n"
-                                        ]
-                                    ]
-                                }
+                            "c:\\cfn\\scripts\\install-join-ad.ps1" : {
+                                "source" : {
+                                    "Fn::Sub" : "https://${QSS3BucketName}.s3.amazonaws.com/${QSS3KeyPrefix}scripts/install-join-ad.ps1"
+                                },
+                                "authentication": "S3AccessCreds"
                             }
                         },
                         "commands" : {
@@ -732,13 +590,27 @@
                                     "Fn::Join" : [
                                         "",
                                         [
-                                            "powershell.exe -ExecutionPolicy RemoteSigned -Command c:\\cfn\\scripts\\install-environment-variables.ps1 \n"
+                                            "powershell.exe -ExecutionPolicy RemoteSigned -Command c:\\cfn\\scripts\\install-environment-variables.ps1 ",
+                                            " -bucket ", {"Ref" : "S3Bucket"},
+                                            " -attachmentBucket ", {"Fn::If" : ["RetainEvaluateS3",{"Ref" : "S3BucketNameEvaluateRetain"},{"Ref" : "S3BucketNameEvaluateDelete"}]},
+                                            " -dns ", {"Ref" : "ElasticIp"},
+                                            " -dbAdminUser ", {"Ref" : "DBAdminUser"},
+                                            " -dbAdminPassword ", {"Ref" : "DBAdminPassword"},
+                                            " -dbUser ", {"Ref" : "DBEvaluateUser"},
+                                            " -dbUserPassword ", {"Ref" : "DBEvaluatePassword"},
+                                            " -dbDns ", {"Fn::GetAtt" : ["SqlExpress","Endpoint.Address"]},
+                                            " -dbPort ", { "Fn::GetAtt" : ["SqlExpress","Endpoint.Port"]},
+                                            " -accountId ", {"Ref" : "AWS::AccountId"},
+                                            " -region ", {"Ref" : "AWS::Region"},
+                                            " -adDomain ", {"Ref" : "DomainDNSName"},
+                                            " -esUrl ", {"Ref" : "ESDomain"}, 
+                                            "\n"                                            
                                         ]
                                     ]
                                 },
                                 "waitAfterCompletion" : "0"
                             },
-                            "6-install-firewall-rules"        : {
+                            "6-install-firewall-rules" : {
                                 "command" : {
                                     "Fn::Join" : [
                                         "",
@@ -749,7 +621,7 @@
                                 },
                                 "waitAfterCompletion" : "0"
                             },
-                            "7-install-create-group"          : {
+                            "7-install-create-group" : {
                                 "command" : {
                                     "Fn::Join" : [
                                         "",
@@ -760,7 +632,7 @@
                                 },
                                 "waitAfterCompletion" : "0"
                             },
-                            "8-install-database"              : {
+                            "8-install-database" : {
                                 "command" : {
                                     "Fn::Join" : [
                                         "",
@@ -771,18 +643,24 @@
                                 },
                                 "waitAfterCompletion" : "5"
                             },
-                            "9-install-join-ad"               : {
+                            "9-install-join-ad" : {
                                 "command" : {
                                     "Fn::Join" : [
                                         "",
                                         [
-                                            "powershell.exe -ExecutionPolicy RemoteSigned -Command c:\\cfn\\scripts\\install-join-ad.ps1 \n"
+                                            "powershell.exe -ExecutionPolicy RemoteSigned -Command c:\\cfn\\scripts\\install-join-ad.ps1",
+                                            " -ip1 ", {"Fn::Select" : ["0",{"Fn::Split" : [",",{"Ref" : "DomainIPs"}]}]},
+                                            " -ip2 ", {"Fn::Select" : ["1",{"Fn::Split" : [",",{"Ref" : "DomainIPs"}]}]},
+                                            " -adDomain ", {"Ref" : "DomainDNSName"},
+                                            " -adAdminUser ", {"Ref" : "DomainNetBiosName"}, "\\", {"Ref" : "DomainAdminUser"},
+                                            " -adAdminPassword ", {"Ref" : "DomainAdminPassword"},
+                                            "\n"
                                         ]
                                     ]
                                 },
                                 "waitAfterCompletion" : "forever"
                             },
-                            "10-signal-success"               : {
+                            "10-signal-success" : {
                                 "command" : {
                                     "Fn::Join" : [
                                         "",
@@ -791,7 +669,7 @@
                                             {
                                                 "Ref" : "AWS::StackName"
                                             },
-                                            " --resource windowsServer --region ",
+                                            " --resource WindowsServer --region ",
                                             {
                                                 "Ref" : "AWS::Region"
                                             }
@@ -805,7 +683,7 @@
                                 "cfn-hup" : {
                                     "enabled" : "true",
                                     "ensureRunning" : "true",
-                                    "files"         : [
+                                    "files" : [
                                         "c:\\cfn\\cfn-hup.conf",
                                         "c:\\cfn\\hooks.d\\cfn-auto-reloader.conf"
                                     ]
@@ -817,9 +695,9 @@
             },
             "Properties" : {
                 "IamInstanceProfile" : {
-                    "Ref" : "rootInstanceProfile"
+                    "Ref" : "RootInstanceProfile"
                 },
-                "Tags"               : [
+                "Tags" : [
                     {
                         "Key" : "APP-NAME",
                         "Value" : "E4AC"
@@ -833,22 +711,22 @@
                         "Value" : "Production"
                     }
                 ],
-                "ImageId"            : {
+                "ImageId" : {
                     "Fn::FindInMap" : [
-                        "AWSRegion2AMI",
+                        "AWSAMIRegionMap",
                         {
                             "Ref" : "AWS::Region"
                         },
-                        "Windows2016DevAMI"
+                        "WS2016R2V1"
                     ]
                 },
-                "InstanceType"       : {
+                "InstanceType" : {
                     "Ref" : "InstanceType"
                 },
-                "KeyName"            : {
+                "KeyName" : {
                     "Ref" : "KeyName"
                 },
-                "UserData"           : {
+                "UserData" : {
                     "Fn::Base64" : {
                         "Fn::Join" : [
                             "",
@@ -858,7 +736,7 @@
                                 {
                                     "Ref" : "AWS::StackName"
                                 },
-                                " -r windowsServer ",
+                                " -r WindowsServer ",
                                 " --region ",
                                 {
                                     "Ref" : "AWS::Region"
@@ -869,12 +747,12 @@
                         ]
                     }
                 },
-                "NetworkInterfaces"  : [
+                "NetworkInterfaces" : [
                     {
                         "NetworkInterfaceId" : {
-                            "Ref" : "webXface"
+                            "Ref" : "WebXface"
                         },
-                        "DeviceIndex"        : "0"
+                        "DeviceIndex" : "0"
                     }
                 ]
             },
@@ -887,10 +765,10 @@
         "S3BucketNameEvaluateRetain" : {
             "Type" : "AWS::S3::Bucket",
             "DeletionPolicy" : "Retain",
-            "Condition"      : "RetainEvaluateS3",
-            "Properties"     : {
+            "Condition" : "RetainEvaluateS3",
+            "Properties" : {
                 "AccessControl" : "BucketOwnerFullControl",
-                "BucketName"    : {
+                "BucketName" : {
                     "Fn::Join" : [
                         "",
                         [
@@ -905,7 +783,7 @@
                         ]
                     ]
                 },
-                "Tags"          : [
+                "Tags" : [
                     {
                         "Key" : "APP-NAME",
                         "Value" : "E4AC"
@@ -924,10 +802,10 @@
         "S3BucketNameEvaluateDelete" : {
             "Type" : "AWS::S3::Bucket",
             "DeletionPolicy" : "Delete",
-            "Condition"      : "DeleteEvaluateS3",
-            "Properties"     : {
+            "Condition" : "DeleteEvaluateS3",
+            "Properties" : {
                 "AccessControl" : "BucketOwnerFullControl",
-                "BucketName"    : {
+                "BucketName" : {
                     "Fn::Join" : [
                         "",
                         [
@@ -942,7 +820,7 @@
                         ]
                     ]
                 },
-                "Tags"          : [
+                "Tags" : [
                     {
                         "Key" : "APP-NAME",
                         "Value" : "E4AC"
@@ -959,34 +837,34 @@
             }
         }
     },
-    "Outputs"                  : {
+    "Outputs" : {
         "PrivateIp" : {
             "Description" : "Private Ip Address",
-            "Value"       : {
+            "Value" : {
                 "Fn::GetAtt" : [
-                    "windowsServer",
+                    "WindowsServer",
                     "PrivateIp"
                 ]
             }
         },
-        "PublicIp"  : {
+        "PublicIp" : {
             "Description" : "Public Ip Address",
-            "Value"       : {
+            "Value" : {
                 "Fn::GetAtt" : [
-                    "windowsServer",
+                    "WindowsServer",
                     "PublicIp"
                 ]
             }
         },
         "EvaluateUrl" : {
             "Description" : "Url for Evaluate for Amazon Connect web application (Active Directory)",
-            "Value"       : {
+            "Value" : {
                 "Fn::Join" : [
                     "",
                     [
                         {
                             "Fn::GetAtt" : [
-                                "windowsServer",
+                                "WindowsServer",
                                 "PublicDnsName"
                             ]
                         },
@@ -995,15 +873,15 @@
                 ]
             }
         },
-        "TlmUrl"      : {
+        "TlmUrl" : {
             "Description" : "Url for Tenant Management System web application (Windows Authentication)",
-            "Value"       : {
+            "Value" : {
                 "Fn::Join" : [
                     "",
                     [
                         {
                             "Fn::GetAtt" : [
-                                "windowsServer",
+                                "WindowsServer",
                                 "PublicDnsName"
                             ]
                         },
@@ -1014,13 +892,13 @@
         },
         "ClusterStatusUrl" : {
             "Description" : "Url for Cluster Status web application (Windows Authentication)",
-            "Value"       : {
+            "Value" : {
                 "Fn::Join" : [
                     "",
                     [
                         {
                             "Fn::GetAtt" : [
-                                "windowsServer",
+                                "WindowsServer",
                                 "PublicDnsName"
                             ]
                         },

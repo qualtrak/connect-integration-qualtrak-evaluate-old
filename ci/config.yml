@@ -20,14 +20,14 @@ global:
  
 tests:
   amazonconnect:
-   parameter_input: evaluate-amazonconnect-json.json
-   template_file: evaluate-amazonconnect-json.template
+   parameter_input: evaluate-amazonconnect.json
+   template_file: evaluate-amazonconnect.template
   evaluate-json:
-   parameter_input: evaluate-json.json
-   template_file: evaluate-json.template
+   parameter_input: evaluate.json
+   template_file: evaluate.template
   evaluate-json-master:
-   parameter_input: evaluate-json-master.json
-   template_file: evaluate-json-master.template    
+   parameter_input: evaluate-master.json
+   template_file: evaluate-master.template    
   evaluate-datastreaming-json-master:
-    parameter_input: evaluate-datastreaming-json-master.json
-    template_file: evaluate-datastreaming-json-master.template    
+    parameter_input: evaluate-datastreaming-master.json
+    template_file: evaluate-datastreaming-master.template    

@@ -1,8 +1,10 @@
-[ 
-{
-    "ParameterKey": "AvailabilityZones",
-    "ParameterValue": "us-east-1a,us-east-1b"
+[{
+    "ParameterKey": "VpcId",
+    "ParameterValue": "vpc-da9304a3"
 }, {
+    "ParameterKey": "SubnetId",
+    "ParameterValue": "subnet-98931ab4"
+},{
     "ParameterKey": "DBName",
     "ParameterValue": "acctr"
 },{
@@ -18,20 +20,11 @@
     "ParameterKey": "KeyPairName",
     "ParameterValue": ""
 },{
-    "ParameterKey": "PrivateSubnet1CIDR",
-    "ParameterValue": "10.0.0.0/19"
+    "ParameterKey": "PrivateSubnetID",
+    "ParameterValue": "subnet-4686e34a,subnet-98931ab4"
 },{
-    "ParameterKey": "PrivateSubnet2CIDR",
-    "ParameterValue": "10.0.32.0/19"
-},{
-    "ParameterKey": "PublicSubnet1CIDR",
-    "ParameterValue": "10.0.128.0/20"
-},{
-    "ParameterKey": "PublicSubnet2CIDR",
-    "ParameterValue": "10.0.144.0/20"
-},{
-    "ParameterKey": "VPCCIDR",
-    "ParameterValue": "10.0.0.0/16"
+    "ParameterKey": "PublicSubnetID",
+    "ParameterValue": "subnet-b61c198a,subnet-b8b3aadd"
 }, {
     "ParameterKey": "RetainEvaluateS3",
     "ParameterValue": "No"
@@ -83,10 +76,4 @@
 }, {
     "ParameterKey": "QSS3KeyPrefix",
     "ParameterValue": "connect/integration/datastreaming/latest/"
-},{
-    "ParameterKey": "EQSS3BucketName",
-    "ParameterValue": "Qualtrak"
-}, {
-    "ParameterKey": "EQSS3KeyPrefix",
-    "ParameterValue": "e4ac/"
 }]
