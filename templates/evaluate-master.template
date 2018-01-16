@@ -650,12 +650,7 @@
             "Type": "AWS::CloudFormation::Stack",
             "Properties": {
                 "TemplateURL": {
-                    "Fn::Sub": [
-                        "https://${QSS3BucketName}.s3.amazonaws.com/${QSS3KeyPrefix}templates/datastreaming.template",
-                        {
-                            "QSS3KeyPrefix": "connect/integration/qualtrak/evaluate/latest/"
-                        }
-                    ]
+                    "Fn::Sub": "https://${QSS3BucketName}.s3.amazonaws.com/${QSS3KeyPrefix}templates/evaluate.template"
                 },
                 "Parameters": {
                     "KeyName": {
@@ -721,9 +716,7 @@
                     "QSS3BucketName": {
                         "Ref": "QSS3BucketName"
                     },
-                    "QSS3KeyPrefix": {
-                        "Ref": "QSS3KeyPrefix"
-                    }
+                    "QSS3KeyPrefix": "connect/integration/qualtrak/evaluate/latest/"
                 }
             }
         }
