@@ -710,13 +710,15 @@
                     "S3EvaluateBucket": {
                         "Ref": "S3EvaluateBucket"
                     },
-                    "kinesisStream": {
+                    "KinesisStream": {
                         "Fn::GetAtt": "DataStreamingStack.Outputs.KinesisStream"
                     },
                     "QSS3BucketName": {
                         "Ref": "QSS3BucketName"
                     },
-                    "QSS3KeyPrefix": "connect/integration/qualtrak/evaluate/latest/"
+                    "QSS3KeyPrefix": {
+                        "Ref": "QSS3KeyPrefix"
+                    }
                 }
             }
         }
