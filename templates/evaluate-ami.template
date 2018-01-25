@@ -350,23 +350,7 @@
                 "Policies": [
                     {
                         "PolicyName": {
-                            "Fn::Join": [
-                                "",
-                                [
-                                    "root-",
-                                    {
-                                        "Ref": "AWS::AccountId"
-                                    },
-                                    "-",
-                                    {
-                                        "Ref": "AWS::StackName"
-                                    },
-                                    "-",
-                                    {
-                                        "Ref": "AWS::Region"
-                                    }
-                                ]
-                            ]
+                            "Fn::Sub" : "root-${AWS::AccountId}-${AWS::StackName}-${AWS::Region}"                            
                         },
                         "PolicyDocument": {
                             "Version": "2012-10-17",
@@ -376,11 +360,9 @@
                                     "Action": "s3:ListBucket",
                                     "Resource": [
                                         {
-                                            "Fn::Join": [
-                                                "",
-                                                [
-                                                    "arn:aws:s3:::",
-                                                    {
+                                            "Fn::Sub" : [ "arn:aws:s3:::${S3BucketAttachment}",
+                                                {
+                                                    "S3BucketAttachment" : {
                                                         "Fn::If": [
                                                             "RetainEvaluateS3",
                                                             {
@@ -391,19 +373,11 @@
                                                             }
                                                         ]
                                                     }
-                                                ]
-                                            ]
+                                                }
+                                            ]                                            
                                         },
                                         {
-                                            "Fn::Join": [
-                                                "",
-                                                [
-                                                    "arn:aws:s3:::",
-                                                    {
-                                                        "Ref": "S3Bucket"
-                                                    }
-                                                ]
-                                            ]
+                                            "Fn::Sub" : "arn:aws:s3:::${S3Bucket}"                                            
                                         }
                                     ]
                                 },
@@ -418,11 +392,9 @@
                                     ],
                                     "Resource": [
                                         {
-                                            "Fn::Join": [
-                                                "",
-                                                [
-                                                    "arn:aws:s3:::",
-                                                    {
+                                            "Fn::Sub" : [ "arn:aws:s3:::${S3BucketAttachment}/*",
+                                                {
+                                                    "S3BucketAttachment" : {
                                                         "Fn::If": [
                                                             "RetainEvaluateS3",
                                                             {
@@ -432,9 +404,8 @@
                                                                 "Ref": "S3BucketNameEvaluateDelete"
                                                             }
                                                         ]
-                                                    },
-                                                    "/*"
-                                                ]
+                                                    }
+                                                }
                                             ]
                                         }
                                     ]
@@ -448,16 +419,7 @@
                                     ],
                                     "Resource": [
                                         {
-                                            "Fn::Join": [
-                                                "",
-                                                [
-                                                    "arn:aws:s3:::",
-                                                    {
-                                                        "Ref": "S3Bucket"
-                                                    },
-                                                    "/*"
-                                                ]
-                                            ]
+                                            "Fn::Sub" : "arn:aws:s3:::${S3Bucket}/*"                                            
                                         }
                                     ]
                                 },
@@ -472,24 +434,7 @@
                                     ],
                                     "Resource": [
                                         {
-                                            "Fn::Join": [
-                                                "",
-                                                [
-                                                    "arn:aws:es:",
-                                                    {
-                                                        "Ref": "AWS::Region"
-                                                    },
-                                                    ":",
-                                                    {
-                                                        "Ref": "AWS::AccountId"
-                                                    },
-                                                    ":domain/",
-                                                    {
-                                                        "Ref": "ESDomain"
-                                                    },
-                                                    "/*"
-                                                ]
-                                            ]
+                                            "Fn::Sub" : "arn:aws:es:${AWS::Region}:${AWS::AccountId}:domain/${ESDomain}/*"                                           
                                         }
                                     ]
                                 }
@@ -517,7 +462,7 @@
                     "config": {
                         "files": {
                             "c:\\cfn\\cfn-hup.conf": {
-                                "content": {
+                                "content": {                                   
                                     "Fn::Join": [
                                         "",
                                         [
@@ -651,36 +596,15 @@
                                 "waitAfterCompletion": "0"
                             },
                             "6-install-firewall-rules": {
-                                "command": {
-                                    "Fn::Join": [
-                                        "",
-                                        [
-                                            "powershell.exe -ExecutionPolicy RemoteSigned -Command c:\\cfn\\scripts\\install-firewall-rules.ps1 \n"
-                                        ]
-                                    ]
-                                },
+                                "command": "powershell.exe -ExecutionPolicy RemoteSigned -Command c:\\cfn\\scripts\\install-firewall-rules.ps1 \n",
                                 "waitAfterCompletion": "0"
                             },
                             "7-install-create-group": {
-                                "command": {
-                                    "Fn::Join": [
-                                        "",
-                                        [
-                                            "powershell.exe -ExecutionPolicy RemoteSigned -Command c:\\cfn\\scripts\\install-group.ps1 \n"
-                                        ]
-                                    ]
-                                },
+                                "command": "powershell.exe -ExecutionPolicy RemoteSigned -Command c:\\cfn\\scripts\\install-group.ps1 \n",
                                 "waitAfterCompletion": "0"
                             },
                             "8-install-database": {
-                                "command": {
-                                    "Fn::Join": [
-                                        "",
-                                        [
-                                            "powershell.exe -ExecutionPolicy RemoteSigned -Command c:\\cfn\\scripts\\install-database.ps1 \n"
-                                        ]
-                                    ]
-                                },
+                                "command": "powershell.exe -ExecutionPolicy RemoteSigned -Command c:\\cfn\\scripts\\install-database.ps1 \n",
                                 "waitAfterCompletion": "5"
                             },
                             "9-install-join-ad": {
@@ -741,19 +665,7 @@
                             },
                             "10-signal-success": {
                                 "command": {
-                                    "Fn::Join": [
-                                        "",
-                                        [
-                                            "cfn-signal.exe -e 0 --stack ",
-                                            {
-                                                "Ref": "AWS::StackName"
-                                            },
-                                            " --resource WindowsServer --region ",
-                                            {
-                                                "Ref": "AWS::Region"
-                                            }
-                                        ]
-                                    ]
+                                    "Fn::Sub" : "cfn-signal.exe -e 0 --stack ${AWS::StackName} --resource WindowsServer --region ${AWS::Region}"                                    
                                 }
                             }
                         },
@@ -834,19 +746,7 @@
             "Properties": {
                 "AccessControl": "BucketOwnerFullControl",
                 "BucketName": {
-                    "Fn::Join": [
-                        "",
-                        [
-                            "evaluate-",
-                            {
-                                "Ref": "AWS::AccountId"
-                            },
-                            "-",
-                            {
-                                "Ref": "S3EvaluateBucket"
-                            }
-                        ]
-                    ]
+                    "Fn::Sub" : "evaluate-${AWS::AccountId}-${S3EvaluateBucket}"                    
                 }
             }
         },
@@ -857,19 +757,7 @@
             "Properties": {
                 "AccessControl": "BucketOwnerFullControl",
                 "BucketName": {
-                    "Fn::Join": [
-                        "",
-                        [
-                            "evaluate-",
-                            {
-                                "Ref": "AWS::AccountId"
-                            },
-                            "-",
-                            {
-                                "Ref": "S3EvaluateBucket"
-                            }
-                        ]
-                    ]
+                    "Fn::Sub" : "evaluate-${AWS::AccountId}-${S3EvaluateBucket}"                     
                 }
             }
         }
@@ -896,52 +784,19 @@
         "EvaluateUrl": {
             "Description": "Url for Evaluate for Amazon Connect web application (Active Directory)",
             "Value": {
-                "Fn::Join": [
-                    "",
-                    [
-                        {
-                            "Fn::GetAtt": [
-                                "WindowsServer",
-                                "PublicDnsName"
-                            ]
-                        },
-                        "/evaluate"
-                    ]
-                ]
+                "Fn::Sub" : "${WindowsServer.PublicDnsName}/evaluate"                
             }
         },
         "TlmUrl": {
             "Description": "Url for Tenant Management System web application (Windows Authentication)",
             "Value": {
-                "Fn::Join": [
-                    "",
-                    [
-                        {
-                            "Fn::GetAtt": [
-                                "WindowsServer",
-                                "PublicDnsName"
-                            ]
-                        },
-                        "/tlm"
-                    ]
-                ]
+                "Fn::Sub" : "${WindowsServer.PublicDnsName}/tlm"               
             }
         },
         "ClusterStatusUrl": {
             "Description": "Url for Cluster Status web application (Windows Authentication)",
             "Value": {
-                "Fn::Join": [
-                    "",
-                    [
-                        {
-                            "Fn::GetAtt": [
-                                "WindowsServer",
-                                "PublicDnsName"
-                            ]
-                        },
-                        "/status"
-                    ]
-                ]
+                "Fn::Sub" : "${WindowsServer.PublicDnsName}/status"                
             }
         }
     }
