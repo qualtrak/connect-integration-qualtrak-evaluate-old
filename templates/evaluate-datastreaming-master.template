@@ -1,6 +1,6 @@
 {
     "AWSTemplateFormatVersion": "2010-09-09",
-    "Description": "Data Streaming Integration (Master Template) for Amazon Connect Quick Start",
+    "Description": "Data Streaming Integration (Master Template) and Evaluate for Amazon Connect combined Quick Start",
     "Mappings": {
         "AWSRegionToFirehose": {
             "us-east-1": {

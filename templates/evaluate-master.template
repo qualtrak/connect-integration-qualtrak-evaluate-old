@@ -1,6 +1,6 @@
 {
     "AWSTemplateFormatVersion": "2010-09-09",
-    "Description": "Data Streaming Integration (Master Template) for Amazon Connect Quick Start", 
+    "Description": "Evaluate (Master Template) for Amazon Connect Quick Start", 
     "Metadata": {
         "AWS::CloudFormation::Interface": {
             "ParameterGroups": [
