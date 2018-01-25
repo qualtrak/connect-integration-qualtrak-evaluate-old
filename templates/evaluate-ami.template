@@ -279,6 +279,23 @@
             }
         }
     },
+    "Rules": {
+        "RegionSupport": {
+            "Assertions": [
+                {
+                    "Assert": {
+                        "Fn::Contains": [
+                            ["us-east-1","eu-central-1","ap-southeast-2"],
+                            {
+                                "Ref": "AWS::Region"
+                            }                            
+                        ]
+                    },
+                    "AssertDescription": "Region must be in either US East (N. Virginia), EU (Frankfurt) or Asia Pacific (Sydney)"
+                }
+            ]
+        }
+    },
     "Conditions": {
         "RetainEvaluateS3": {
             "Fn::Equals": [
