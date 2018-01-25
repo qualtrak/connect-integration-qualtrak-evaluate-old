@@ -69,21 +69,7 @@
                         "Ref": "WebSecurityGroup"
                     }
                 ],
-                "SourceDestCheck": "true",
-                "Tags": [
-                    {
-                        "Key": "APP-NAME",
-                        "Value": "E4AC"
-                    },
-                    {
-                        "Key": "VENDOR",
-                        "Value": "Qualtrak"
-                    },
-                    {
-                        "Key": "STAGE",
-                        "Value": "Production"
-                    }
-                ]
+                "SourceDestCheck": "true"
             }
         },
         "WebSecurityGroup": {
@@ -92,20 +78,6 @@
                 "VpcId": {
                     "Ref": "VpcId"
                 },
-                "Tags": [
-                    {
-                        "Key": "APP-NAME",
-                        "Value": "E4AC"
-                    },
-                    {
-                        "Key": "VENDOR",
-                        "Value": "Qualtrak"
-                    },
-                    {
-                        "Key": "STAGE",
-                        "Value": "Production"
-                    }
-                ],
                 "GroupDescription": "Enable HTTP access via user defined port",
                 "SecurityGroupIngress": [
                     {

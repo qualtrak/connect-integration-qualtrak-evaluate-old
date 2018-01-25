@@ -238,17 +238,7 @@
         },
         "ElasticsearchDomain": {
             "Type": "AWS::Elasticsearch::Domain",
-            "Properties": {
-                "Tags": [
-                    {
-                        "Key": "app-name",
-                        "Value": "E4AC"
-                    },
-                    {
-                        "Key": "vendor",
-                        "Value": "Qualtrak"
-                    }
-                ],
+            "Properties": {                
                 "DomainName": {
                     "Ref": "ESDomain"
                 },

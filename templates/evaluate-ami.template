@@ -313,21 +313,7 @@
         "SqlExpress": {
             "Type": "AWS::RDS::DBInstance",
             "DeletionPolicy": "Snapshot",
-            "Properties": {
-                "Tags": [
-                    {
-                        "Key": "APP-NAME",
-                        "Value": "E4AC"
-                    },
-                    {
-                        "Key": "VENDOR",
-                        "Value": "Qualtrak"
-                    },
-                    {
-                        "Key": "STAGE",
-                        "Value": "Production"
-                    }
-                ],
+            "Properties": {                
                 "AllocatedStorage": "100",
                 "DBInstanceClass": "db.t2.medium",
                 "Engine": "sqlserver-ex",
@@ -788,21 +774,7 @@
             "Properties": {
                 "IamInstanceProfile": {
                     "Ref": "RootInstanceProfile"
-                },
-                "Tags": [
-                    {
-                        "Key": "APP-NAME",
-                        "Value": "E4AC"
-                    },
-                    {
-                        "Key": "VENDOR",
-                        "Value": "Qualtrak"
-                    },
-                    {
-                        "Key": "STAGE",
-                        "Value": "Production"
-                    }
-                ],
+                },                
                 "ImageId": {
                     "Fn::FindInMap": [
                         "AWSAMIRegionMap",
@@ -874,21 +846,7 @@
                             }
                         ]
                     ]
-                },
-                "Tags": [
-                    {
-                        "Key": "APP-NAME",
-                        "Value": "E4AC"
-                    },
-                    {
-                        "Key": "VENDOR",
-                        "Value": "Qualtrak"
-                    },
-                    {
-                        "Key": "STAGE",
-                        "Value": "Production"
-                    }
-                ]
+                }
             }
         },
         "S3BucketNameEvaluateDelete": {
@@ -911,21 +869,7 @@
                             }
                         ]
                     ]
-                },
-                "Tags": [
-                    {
-                        "Key": "APP-NAME",
-                        "Value": "E4AC"
-                    },
-                    {
-                        "Key": "VENDOR",
-                        "Value": "Qualtrak"
-                    },
-                    {
-                        "Key": "STAGE",
-                        "Value": "Production"
-                    }
-                ]
+                }
             }
         }
     },
