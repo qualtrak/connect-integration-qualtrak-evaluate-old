@@ -1,1 +1,64 @@
-{}
+[ {
+    "ParameterKey": "RetainEvaluateS3",
+    "ParameterValue": "No"
+}, {
+    "ParameterKey": "RDPFrom",
+    "ParameterValue": ""
+}, {
+    "ParameterKey": "KeyName",
+    "ParameterValue": ""
+}, {
+    "ParameterKey": "InstanceType",
+    "ParameterValue": "m4.large"
+}, {
+    "ParameterKey": "DomainDNSName",
+    "ParameterValue": ""
+}, {
+    "ParameterKey": "DBEvaluateUser",
+    "ParameterValue": "EvaluateUser"
+}, {
+    "ParameterKey": "DBEvaluatePassword",
+    "ParameterValue": ""
+}, {
+    "ParameterKey": "DomainIPs",
+    "ParameterValue": ""
+}, {
+    "ParameterKey": "DomainAdminUser",
+    "ParameterValue": "Administrator"
+}, {
+    "ParameterKey": "DomainAdminPassword",
+    "ParameterValue": ""
+}, {
+    "ParameterKey": "DomainNetBiosName",
+    "ParameterValue": ""
+}, {
+    "ParameterKey": "VpcId",
+    "ParameterValue": ""
+}, {
+    "ParameterKey": "SubnetId",
+    "ParameterValue": ""
+}, {
+    "ParameterKey": "DBAdminUser",
+    "ParameterValue": "EvaluateAdmin"
+}, {
+    "ParameterKey": "DBAdminPassword",
+    "ParameterValue": ""
+}, {
+    "ParameterKey": "KinesisStream",
+    "ParameterValue": "test-ks"
+}, {
+    "ParameterKey": "ESDomain",
+    "ParameterValue": "evaluate"
+}, {
+    "ParameterKey": "S3Bucket",
+    "ParameterValue": ""
+}, {
+    "ParameterKey": "S3EvaluateBucket",
+    "ParameterValue": "mynewbucket"
+}, {
+    "ParameterKey": "QSS3BucketName",
+    "ParameterValue": "quickstart-reference"
+}, {
+    "ParameterKey": "QSS3KeyPrefix",
+    "ParameterValue": "connect/integration/qualtrak/latest/"
+}]

@@ -1,48 +1,6 @@
 {
     "AWSTemplateFormatVersion": "2010-09-09",
-    "Description": "Data Streaming Integration (Master Template) for Amazon Connect Quick Start",
-    "Mappings": {
-        "AWSRegionToFirehose": {
-            "us-east-1": {
-                "IPRange": "52.70.63.192/27"
-            },
-            "us-east-2": {
-                "IPRange": "13.58.135.96/27"
-            },
-            "us-west-2": {
-                "IPRange": "52.89.255.224/27"
-            },
-            "ap-northeast-1": {
-                "IPRange": "13.113.196.224/27"
-            },
-            "eu-central-1": {
-                "IPRange": "35.158.127.160/27"
-            },
-            "eu-west-1": {
-                "IPRange": "52.19.239.192/27"
-            }
-        },
-        "QuickSightRegionConfig": {
-            "us-east-1": {
-                "IPRange": "52.23.63.224/27"
-            },
-            "us-east-2": {
-                "IPRange": "52.15.247.160/27"
-            },
-            "us-west-2": {
-                "IPRange": "54.70.204.128/27"
-            },
-            "ap-southeast-1": {
-                "IPRange": "13.229.254.0/27"
-            },
-            "ap-southeast-2": {
-                "IPRange": "54.153.249.96/27"
-            },
-            "eu-west-1": {
-                "IPRange": "52.210.255.224/27"
-            }
-        }
-    },
+    "Description": "Evaluate (Master Template) for Amazon Connect Quick Start", 
     "Metadata": {
         "AWS::CloudFormation::Interface": {
             "ParameterGroups": [
@@ -499,6 +457,7 @@
         },
         "S3Bucket": {
             "Type": "String",
+            "Description" : "Amazon Connect Data Streaming S3 Bucket",
             "MinLength": "3",
             "MaxLength": "63",
             "AllowedPattern": "^[a-z0-9]+([0-9a-zA-Z-.]*[0-9a-z])*$",
