@@ -612,53 +612,32 @@
                     "Fn::Sub": "https://${QSS3BucketName}.s3.amazonaws.com/${QSS3KeyPrefix}templates/evaluate.template"
                 },
                 "Parameters": {
-                    "KeyName": {
-                        "Ref": "KeyPairName"
-                    },
-                    "RetainEvaluateS3": {
-                        "Ref": "RetainEvaluateS3"
-                    },
-                    "RDPFrom": {
-                        "Ref": "RDPFrom"
-                    },
-                    "InstanceType": {
-                        "Ref": "InstanceType"
-                    },
-                    "DomainDNSName": {
-                        "Ref": "DomainDNSName"
-                    },
-                    "DBEvaluateUser": {
-                        "Ref": "DBEvaluateUser"
-                    },
-                    "DBEvaluatePassword": {
-                        "Ref": "DBEvaluatePassword"
-                    },
-                    "DomainIPs": {
-                        "Ref": "DomainIPs"
-                    },
-                    "DomainAdminUser": {
-                        "Ref": "DomainAdminUser"
-                    },
-                    "DomainAdminPassword": {
-                        "Ref": "DomainAdminPassword"
-                    },
-                    "DomainNetBiosName": {
-                        "Ref": "DomainNetBiosName"
-                    },
-                    "VpcId": {
-                        "Fn::GetAtt": "VPCStack.Outputs.VPCID"
-                    },
-                    "SubnetId": {
-                        "Fn::GetAtt": "VPCStack.Outputs.PublicSubnet1ID"
+                    "DBAdminPassword": {
+                        "Ref": "DBAdminPassword"
                     },
                     "DBAdminUser": {
                         "Ref": "DBAdminUser"
                     },
-                    "DBAdminPassword": {
-                        "Ref": "DBAdminPassword"
+                    "DBEvaluatePassword": {
+                        "Ref": "DBEvaluatePassword"
                     },
-                    "S3Bucket": {
-                        "Ref": "S3Bucket"
+                    "DBEvaluateUser": {
+                        "Ref": "DBEvaluateUser"
+                    },
+                    "DomainAdminPassword": {
+                        "Ref": "DomainAdminPassword"
+                    },
+                    "DomainAdminUser": {
+                        "Ref": "DomainAdminUser"
+                    },
+                    "DomainDNSName": {
+                        "Ref": "DomainDNSName"
+                    },
+                    "DomainIPs": {
+                        "Ref": "DomainIPs"
+                    },
+                    "DomainNetBiosName": {
+                        "Ref": "DomainNetBiosName"
                     },
                     "ESDomain": {
                         "Ref": "ESDomain"
@@ -666,8 +645,11 @@
                     "ESInstanceType": {
                         "Ref": "ESInstanceType"
                     },
-                    "S3EvaluateBucket": {
-                        "Ref": "S3EvaluateBucket"
+                    "InstanceType": {
+                        "Ref": "InstanceType"
+                    },
+                    "KeyName": {
+                        "Ref": "KeyPairName"
                     },
                     "KinesisStream": {
                         "Fn::GetAtt": "DataStreamingStack.Outputs.KinesisStream"
@@ -677,6 +659,24 @@
                     },
                     "QSS3KeyPrefix": {
                         "Ref": "QSS3KeyPrefix"
+                    },
+                    "RDPFrom": {
+                        "Ref": "RDPFrom"
+                    },
+                    "RetainEvaluateS3": {
+                        "Ref": "RetainEvaluateS3"
+                    },
+                    "S3Bucket": {
+                        "Ref": "S3Bucket"
+                    },
+                    "S3EvaluateBucket": {
+                        "Ref": "S3EvaluateBucket"
+                    },
+                    "SubnetID": {
+                        "Fn::GetAtt": "VPCStack.Outputs.PublicSubnet1ID"
+                    },
+                    "VpcId": {
+                        "Fn::GetAtt": "VPCStack.Outputs.VPCID"
                     }
                 }
             }

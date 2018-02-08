@@ -2,30 +2,17 @@
     "AWSTemplateFormatVersion": "2010-09-09",
     "Description": "This template creates a Kinesis Firehose to ElasticSearch to feed from a user inputed Kinesis Stream name",
     "Parameters": {
-        "KinesisStream": {
-            "Type": "String",
-            "Description": "The name of your existing Kinesis Stream"
+        "CidrBlock": {
+            "AllowedPattern": "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(/([0-9]|[1-2][0-9]|3[0-2]))$",
+            "ConstraintDescription": "Must not be empty, must be valid IPv4 address with valid Mask Bit from 1-32",
+            "Description": "VPC CIDR Block (eg 10.0.0.0/16)",
+            "Type": "String"
         },
         "ESDomain": {
-            "Type": "String",
-            "Description": "This is the name for the ElasticSearch Domain"
-        },
-        "CidrBlock": {
-            "Description": "VPC CIDR Block (eg 10.0.0.0/16)",
-            "Type": "String",
-            "AllowedPattern": "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(/([0-9]|[1-2][0-9]|3[0-2]))$",
-            "ConstraintDescription": "Must not be empty, must be valid IPv4 address with valid Mask Bit from 1-32"
-        },
-        "S3Bucket": {
-            "Description": "Please refer to http://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-instance.html#datastorage for details on how retrieve the S3 bucket associated with your Amazon Connect instance. This is the S3 bucket where Amazon Connect stores call recordings and scheduled reports.",
-            "Type": "String",
-            "AllowedPattern": "connect-[0-9a-f]{12}",
-            "ConstraintDescription": "Invalid S3 Bucket format. Must be in the form connect-xxxxxxxxxxxx"
+            "Description": "This is the name for the ElasticSearch Domain",
+            "Type": "String"
         },
         "ESInstanceType": {
-            "Description": "Amazon ElasticSearch instance type",
-            "Type": "String",
-            "Default": "t2.medium.elasticsearch",
             "AllowedValues": [
                 "t2.medium.elasticsearch",
                 "m3.medium.elasticsearch",
@@ -55,7 +42,20 @@
                 "r4.16xlarge.elasticsearch",
                 "i2.xlarge.elasticsearch",
                 "i2.2xlarge.elasticsearch"
-            ]
+            ],
+            "Default": "t2.medium.elasticsearch",
+            "Description": "Amazon ElasticSearch instance type",
+            "Type": "String"
+        },
+        "KinesisStream": {
+            "Description": "The name of your existing Kinesis Stream",
+            "Type": "String"
+        },
+        "S3Bucket": {
+            "AllowedPattern": "connect-[0-9a-f]{12}",
+            "ConstraintDescription": "Invalid S3 Bucket format. Must be in the form connect-xxxxxxxxxxxx",
+            "Description": "Please refer to http://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-instance.html#datastorage for details on how retrieve the S3 bucket associated with your Amazon Connect instance. This is the S3 bucket where Amazon Connect stores call recordings and scheduled reports.",
+            "Type": "String"
         }
     },
     "Metadata": {
@@ -82,8 +82,8 @@
                 }
             ],
             "ParameterLabels": {
-                "KinesisStream": {
-                    "default": "Kinesis Stream"
+                "CidrBlock": {
+                    "default": "Cidr Block"
                 },
                 "ESDomain": {
                     "default": "ES Domain"
@@ -91,11 +91,11 @@
                 "ESInstanceType": {
                     "default": "ES Instance Type"
                 },
+                "KinesisStream": {
+                    "default": "Kinesis Stream"
+                },
                 "S3Bucket": {
                     "default": "S3 Bucket"
-                },
-                "CidrBlock": {
-                    "default": "Cidr Block"
                 }
             }
         }
