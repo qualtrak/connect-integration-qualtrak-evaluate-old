@@ -9,7 +9,7 @@
                         "default": "Network Configuration"
                     },
                     "Parameters": [
-                        "VpcId",
+                        "VPCID",
                         "PrivateSubnetID",
                         "PublicSubnetID",
                         "KeyPairName"
@@ -33,7 +33,7 @@
                     "Parameters": [
                         "InstanceType",
                         "RDPFrom",
-                        "SubnetId"
+                        "SubnetID"
                     ]
                 },
                 {
@@ -174,11 +174,11 @@
                 "S3EvaluateBucket": {
                     "default": "S3 Evaluate Bucket"
                 },
-                "SubnetId": {
-                    "default": "Subnet Id"
+                "SubnetID": {
+                    "default": "Subnet ID"
                 },
-                "VpcId": {
-                    "default": "Vpc Id"
+                "VPCID": {
+                    "default": "VPC ID"
                 }
             }
         }
@@ -431,12 +431,12 @@
             "MinLength": "3",
             "Type": "String"
         },
-        "SubnetId": {
-            "Description": "Subnet Id, must be same CIDR that was supplied when ElasticSearch was deployed",
+        "SubnetID": {
+            "Description": "Subnet ID, must be same CIDR that was supplied when ElasticSearch was deployed",
             "Type": "AWS::EC2::Subnet::Id"
         },
-        "VpcId": {
-            "Description": "VPC Id",
+        "VPCID": {
+            "Description": "VPC ID",
             "Type": "AWS::EC2::VPC::Id"
         }
     },
@@ -519,7 +519,7 @@
                         "Ref": "QSS3KeyPrefix"
                     },
                     "VPCID": {
-                        "Ref": "VpcId"
+                        "Ref": "VPCID"
                     }
                 }
             }
@@ -565,11 +565,11 @@
                     "DomainNetBiosName": {
                         "Ref": "DomainNetBiosName"
                     },
-                    "VpcId": {
-                        "Ref": "VpcId"
+                    "VPCID": {
+                        "Ref": "VPCID"
                     },
-                    "SubnetId": {
-                        "Ref": "SubnetId"
+                    "SubnetID": {
+                        "Ref": "SubnetID"
                     },
                     "DBAdminUser": {
                         "Ref": "DBAdminUser"

@@ -675,7 +675,7 @@
                     "SubnetID": {
                         "Fn::GetAtt": "VPCStack.Outputs.PublicSubnet1ID"
                     },
-                    "VpcId": {
+                    "VPCID": {
                         "Fn::GetAtt": "VPCStack.Outputs.VPCID"
                     }
                 }
