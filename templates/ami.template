@@ -304,14 +304,6 @@
                 },
                 "Yes"
             ]
-        },
-        "DeleteEvaluateS3": {
-            "Fn::Equals": [
-                {
-                    "Ref": "RetainEvaluateS3"
-                },
-                "No"
-            ]
         }
     },
     "Mappings": {
@@ -377,21 +369,7 @@
                                     "Action": "s3:ListBucket",
                                     "Resource": [
                                         {
-                                            "Fn::Sub" : [ "arn:aws:s3:::${S3BucketAttachment}",
-                                                {
-                                                    "S3BucketAttachment" : {
-                                                        "Fn::If": [
-                                                            "RetainEvaluateS3",
-                                                            {
-                                                                "Ref": "S3BucketNameEvaluateRetain"
-                                                            },
-                                                            {
-                                                                "Ref": "S3BucketNameEvaluateDelete"
-                                                            }
-                                                        ]
-                                                    }
-                                                }
-                                            ]                                            
+                                            "Fn::Sub" : "arn:aws:s3:::${S3BucketNameEvaluate}"
                                         },
                                         {
                                             "Fn::Sub" : "arn:aws:s3:::${S3Bucket}"                                            
@@ -409,21 +387,7 @@
                                     ],
                                     "Resource": [
                                         {
-                                            "Fn::Sub" : [ "arn:aws:s3:::${S3BucketAttachment}/*",
-                                                {
-                                                    "S3BucketAttachment" : {
-                                                        "Fn::If": [
-                                                            "RetainEvaluateS3",
-                                                            {
-                                                                "Ref": "S3BucketNameEvaluateRetain"
-                                                            },
-                                                            {
-                                                                "Ref": "S3BucketNameEvaluateDelete"
-                                                            }
-                                                        ]
-                                                    }
-                                                }
-                                            ]
+                                            "Fn::Sub" : "arn:aws:s3:::${S3BucketNameEvaluate}/*"
                                         }
                                     ]
                                 },
@@ -546,15 +510,7 @@
                                             },
                                             " -attachmentBucket ",
                                             {
-                                                "Fn::If": [
-                                                    "RetainEvaluateS3",
-                                                    {
-                                                        "Ref": "S3BucketNameEvaluateRetain"
-                                                    },
-                                                    {
-                                                        "Ref": "S3BucketNameEvaluateDelete"
-                                                    }
-                                                ]
+                                                "Ref": "S3BucketNameEvaluate"
                                             },
                                             " -dns ",
                                             {
@@ -756,25 +712,21 @@
                 }
             }
         },
-        "S3BucketNameEvaluateRetain": {
+        "S3BucketNameEvaluate": {
             "Type": "AWS::S3::Bucket",
-            "DeletionPolicy": "Retain",
-            "Condition": "RetainEvaluateS3",
-            "Properties": {
-                "AccessControl": "BucketOwnerFullControl",
-                "BucketName": {
-                    "Fn::Sub" : "evaluate-${AWS::AccountId}-${S3EvaluateBucket}"                    
+            "Fn::If": [
+                "RetainEvaluateS3",
+                {
+                    "DeletionPolicy": "Retain"
+                },
+                {
+                    "DeletionPolicy": "Delete"
                 }
-            }
-        },
-        "S3BucketNameEvaluateDelete": {
-            "Type": "AWS::S3::Bucket",
-            "DeletionPolicy": "Delete",
-            "Condition": "DeleteEvaluateS3",
+            ],
             "Properties": {
                 "AccessControl": "BucketOwnerFullControl",
                 "BucketName": {
-                    "Fn::Sub" : "evaluate-${AWS::AccountId}-${S3EvaluateBucket}"                     
+                    "Fn::Sub" : "evaluate-${AWS::AccountId}-${S3EvaluateBucket}"
                 }
             }
         }
