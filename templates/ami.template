@@ -285,10 +285,14 @@
                 {
                     "Assert": {
                         "Fn::Contains": [
-                            ["us-east-1","eu-central-1","ap-southeast-2"],
+                            [
+                                "us-east-1",
+                                "eu-central-1",
+                                "ap-southeast-2"
+                            ],
                             {
                                 "Ref": "AWS::Region"
-                            }                            
+                            }
                         ]
                     },
                     "AssertDescription": "Region must be in either US East (N. Virginia), EU (Frankfurt) or Asia Pacific (Sydney)"
@@ -323,7 +327,7 @@
         "SqlExpress": {
             "Type": "AWS::RDS::DBInstance",
             "DeletionPolicy": "Snapshot",
-            "Properties": {                
+            "Properties": {
                 "AllocatedStorage": "100",
                 "DBInstanceClass": "db.t2.medium",
                 "Engine": "sqlserver-ex",
@@ -359,7 +363,7 @@
                 "Policies": [
                     {
                         "PolicyName": {
-                            "Fn::Sub" : "root-${AWS::AccountId}-${AWS::StackName}-${AWS::Region}"                            
+                            "Fn::Sub": "root-${AWS::AccountId}-${AWS::StackName}-${AWS::Region}"
                         },
                         "PolicyDocument": {
                             "Version": "2012-10-17",
@@ -369,10 +373,10 @@
                                     "Action": "s3:ListBucket",
                                     "Resource": [
                                         {
-                                            "Fn::Sub" : "arn:aws:s3:::${S3BucketNameEvaluate}"
+                                            "Fn::Sub": "arn:aws:s3:::${S3BucketNameEvaluate}"
                                         },
                                         {
-                                            "Fn::Sub" : "arn:aws:s3:::${S3Bucket}"                                            
+                                            "Fn::Sub": "arn:aws:s3:::${S3Bucket}"
                                         }
                                     ]
                                 },
@@ -387,7 +391,7 @@
                                     ],
                                     "Resource": [
                                         {
-                                            "Fn::Sub" : "arn:aws:s3:::${S3BucketNameEvaluate}/*"
+                                            "Fn::Sub": "arn:aws:s3:::${S3BucketNameEvaluate}/*"
                                         }
                                     ]
                                 },
@@ -400,7 +404,7 @@
                                     ],
                                     "Resource": [
                                         {
-                                            "Fn::Sub" : "arn:aws:s3:::${S3Bucket}/*"                                            
+                                            "Fn::Sub": "arn:aws:s3:::${S3Bucket}/*"
                                         }
                                     ]
                                 },
@@ -415,7 +419,7 @@
                                     ],
                                     "Resource": [
                                         {
-                                            "Fn::Sub" : "arn:aws:es:${AWS::Region}:${AWS::AccountId}:domain/${ESDomain}/*"                                           
+                                            "Fn::Sub": "arn:aws:es:${AWS::Region}:${AWS::AccountId}:domain/${ESDomain}/*"
                                         }
                                     ]
                                 }
@@ -443,7 +447,7 @@
                     "config": {
                         "files": {
                             "c:\\cfn\\cfn-hup.conf": {
-                                "content": {                                   
+                                "content": {
                                     "Fn::Join": [
                                         "",
                                         [
@@ -638,7 +642,7 @@
                             },
                             "10-signal-success": {
                                 "command": {
-                                    "Fn::Sub" : "cfn-signal.exe -e 0 --stack ${AWS::StackName} --resource WindowsServer --region ${AWS::Region}"                                    
+                                    "Fn::Sub": "cfn-signal.exe -e 0 --stack ${AWS::StackName} --resource WindowsServer --region ${AWS::Region}"
                                 }
                             }
                         },
@@ -660,7 +664,7 @@
             "Properties": {
                 "IamInstanceProfile": {
                     "Ref": "RootInstanceProfile"
-                },                
+                },
                 "ImageId": {
                     "Fn::FindInMap": [
                         "AWSAMIRegionMap",
@@ -726,7 +730,7 @@
             "Properties": {
                 "AccessControl": "BucketOwnerFullControl",
                 "BucketName": {
-                    "Fn::Sub" : "evaluate-${AWS::AccountId}-${S3EvaluateBucket}"
+                    "Fn::Sub": "evaluate-${AWS::AccountId}-${S3EvaluateBucket}"
                 }
             }
         }
@@ -753,19 +757,19 @@
         "EvaluateUrl": {
             "Description": "Url for Evaluate for Amazon Connect web application (Active Directory)",
             "Value": {
-                "Fn::Sub" : "${WindowsServer.PublicDnsName}/evaluate"                
+                "Fn::Sub": "${WindowsServer.PublicDnsName}/evaluate"
             }
         },
         "TlmUrl": {
             "Description": "Url for Tenant Management System web application (Windows Authentication)",
             "Value": {
-                "Fn::Sub" : "${WindowsServer.PublicDnsName}/tlm"               
+                "Fn::Sub": "${WindowsServer.PublicDnsName}/tlm"
             }
         },
         "ClusterStatusUrl": {
             "Description": "Url for Cluster Status web application (Windows Authentication)",
             "Value": {
-                "Fn::Sub" : "${WindowsServer.PublicDnsName}/status"                
+                "Fn::Sub": "${WindowsServer.PublicDnsName}/status"
             }
         }
     }

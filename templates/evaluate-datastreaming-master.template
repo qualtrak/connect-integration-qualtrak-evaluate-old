@@ -1,6 +1,6 @@
 {
     "AWSTemplateFormatVersion": "2010-09-09",
-    "Description": "Evaluate (Master Template) for Amazon Connect Quick Start", 
+    "Description": "Evaluate (Master Template) for Amazon Connect Quick Start",
     "Metadata": {
         "AWS::CloudFormation::Interface": {
             "ParameterGroups": [
@@ -457,7 +457,7 @@
         },
         "S3Bucket": {
             "Type": "String",
-            "Description" : "Amazon Connect Data Streaming S3 Bucket",
+            "Description": "Amazon Connect Data Streaming S3 Bucket",
             "MinLength": "3",
             "MaxLength": "63",
             "AllowedPattern": "^[a-z0-9]+([0-9a-zA-Z-.]*[0-9a-z])*$",

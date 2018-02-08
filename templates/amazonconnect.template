@@ -238,7 +238,7 @@
         },
         "ElasticsearchDomain": {
             "Type": "AWS::Elasticsearch::Domain",
-            "Properties": {                
+            "Properties": {
                 "DomainName": {
                     "Ref": "ESDomain"
                 },
@@ -270,7 +270,7 @@
                             },
                             "Action": "es:*",
                             "Resource": {
-                                "Fn::Sub" : "arn:aws:es:${AWS::Region}:${AWS::AccountId}:domain/${ESDomain}/*"                                
+                                "Fn::Sub": "arn:aws:es:${AWS::Region}:${AWS::AccountId}:domain/${ESDomain}/*"
                             },
                             "Condition": {
                                 "IpAddress": {
@@ -314,10 +314,10 @@
                             ],
                             "Resource": [
                                 {
-                                    "Fn::Sub" : "arn:aws:s3:::${S3Bucket}"                                   
+                                    "Fn::Sub": "arn:aws:s3:::${S3Bucket}"
                                 },
                                 {
-                                    "Fn::Sub" : "arn:aws:s3:::${S3Bucket}/*"                                   
+                                    "Fn::Sub": "arn:aws:s3:::${S3Bucket}/*"
                                 }
                             ]
                         },
@@ -332,10 +332,10 @@
                             ],
                             "Resource": [
                                 {
-                                    "Fn::Sub" : "arn:aws:es:${AWS::Region}:${AWS::AccountId}:domain/${ESDomain}"                                   
+                                    "Fn::Sub": "arn:aws:es:${AWS::Region}:${AWS::AccountId}:domain/${ESDomain}"
                                 },
                                 {
-                                    "Fn::Sub" : "arn:aws:es:${AWS::Region}:${AWS::AccountId}:domain/${ESDomain}/*"                                                                       
+                                    "Fn::Sub": "arn:aws:es:${AWS::Region}:${AWS::AccountId}:domain/${ESDomain}/*"
                                 }
                             ]
                         },
@@ -346,28 +346,28 @@
                             ],
                             "Resource": [
                                 {
-                                    "Fn::Sub" : "arn:aws:es:${AWS::Region}:${AWS::AccountId}:domain/${ESDomain}/_all/_settings"                                      
+                                    "Fn::Sub": "arn:aws:es:${AWS::Region}:${AWS::AccountId}:domain/${ESDomain}/_all/_settings"
                                 },
                                 {
-                                    "Fn::Sub" : "arn:aws:es:${AWS::Region}:${AWS::AccountId}:domain/${ESDomain}/_cluster/stats"                                      
+                                    "Fn::Sub": "arn:aws:es:${AWS::Region}:${AWS::AccountId}:domain/${ESDomain}/_cluster/stats"
                                 },
                                 {
-                                    "Fn::Sub" : "arn:aws:es:${AWS::Region}:${AWS::AccountId}:domain/${ESDomain}/ac*/_mapping/ctr"                                      
+                                    "Fn::Sub": "arn:aws:es:${AWS::Region}:${AWS::AccountId}:domain/${ESDomain}/ac*/_mapping/ctr"
                                 },
                                 {
-                                    "Fn::Sub" : "arn:aws:es:${AWS::Region}:${AWS::AccountId}:domain/${ESDomain}/_nodes"                                      
+                                    "Fn::Sub": "arn:aws:es:${AWS::Region}:${AWS::AccountId}:domain/${ESDomain}/_nodes"
                                 },
                                 {
-                                    "Fn::Sub" : "arn:aws:es:${AWS::Region}:${AWS::AccountId}:domain/${ESDomain}/_nodes/stats"                                                                          
+                                    "Fn::Sub": "arn:aws:es:${AWS::Region}:${AWS::AccountId}:domain/${ESDomain}/_nodes/stats"
                                 },
                                 {
-                                    "Fn::Sub" : "arn:aws:es:${AWS::Region}:${AWS::AccountId}:domain/${ESDomain}/_nodes/*/stats"                                                                         
+                                    "Fn::Sub": "arn:aws:es:${AWS::Region}:${AWS::AccountId}:domain/${ESDomain}/_nodes/*/stats"
                                 },
                                 {
-                                    "Fn::Sub" : "arn:aws:es:${AWS::Region}:${AWS::AccountId}:domain/${ESDomain}/_stats"                                                                         
+                                    "Fn::Sub": "arn:aws:es:${AWS::Region}:${AWS::AccountId}:domain/${ESDomain}/_stats"
                                 },
                                 {
-                                    "Fn::Sub" : "arn:aws:es:${AWS::Region}:${AWS::AccountId}:domain/${ESDomain}/ac*/_stats"                                                                          
+                                    "Fn::Sub": "arn:aws:es:${AWS::Region}:${AWS::AccountId}:domain/${ESDomain}/ac*/_stats"
                                 }
                             ]
                         },
@@ -378,7 +378,7 @@
                             ],
                             "Resource": [
                                 {
-                                    "Fn::Sub" : "arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:${DeliveryStream}:log-stream:*"                                    
+                                    "Fn::Sub": "arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:${DeliveryStream}:log-stream:*"
                                 }
                             ]
                         }
@@ -396,10 +396,10 @@
                 "DeliveryStreamType": "KinesisStreamAsSource",
                 "KinesisStreamSourceConfiguration": {
                     "KinesisStreamARN": {
-                        "Fn::Sub" : "arn:aws:kinesis:${AWS::Region}:${AWS::AccountId}:stream/${KinesisStream}"
+                        "Fn::Sub": "arn:aws:kinesis:${AWS::Region}:${AWS::AccountId}:stream/${KinesisStream}"
                     },
                     "RoleARN": {
-                        "Fn::Sub" : "arn:aws:iam::${AWS::AccountId}:role/${KinesisRole}"                        
+                        "Fn::Sub": "arn:aws:iam::${AWS::AccountId}:role/${KinesisRole}"
                     }
                 },
                 "ElasticsearchDestinationConfiguration": {
@@ -437,7 +437,7 @@
                     "S3BackupMode": "FailedDocumentsOnly",
                     "S3Configuration": {
                         "BucketARN": {
-                            "Fn::Sub" : "arn:aws:s3:::${S3Bucket}"                            
+                            "Fn::Sub": "arn:aws:s3:::${S3Bucket}"
                         },
                         "BufferingHints": {
                             "IntervalInSeconds": "60",
