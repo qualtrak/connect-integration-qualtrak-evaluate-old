@@ -53,8 +53,7 @@
                     "Label": {
                         "default": "S3 Configuration"
                     },
-                    "Parameters": [
-                        "RetainEvaluateS3",
+                    "Parameters": [                     
                         "S3EvaluateBucket"
                     ]
                 },
@@ -148,9 +147,6 @@
                 },
                 "ESInstanceType": {
                     "default": "ES Instance Type"
-                },
-                "RetainEvaluateS3": {
-                    "default": "Retain Evaluate S3"
                 },
                 "DBEvaluateUser": {
                     "default": "DB Evaluate User"
@@ -274,17 +270,7 @@
             "Description": "CIDR block for the VPC",
             "Type": "String",
             "Default": "10.0.0.0/16"
-        },
-        "RetainEvaluateS3": {
-            "Description": "After you have deleted this Stack, do you want to retain or delete the Evaluate S3 where all your Evaluation Attachments are stored?",
-            "Default": "No",
-            "Type": "String",
-            "AllowedValues": [
-                "Yes",
-                "No"
-            ],
-            "ConstraintDescription": "must specify Yes or No."
-        },
+        },        
         "RDPFrom": {
             "Description": "Lockdown RDP access to EC2 instance from valid IPv4 address, e.g. 201.0.1.3/19",
             "Type": "String",
@@ -662,10 +648,7 @@
                     },
                     "RDPFrom": {
                         "Ref": "RDPFrom"
-                    },
-                    "RetainEvaluateS3": {
-                        "Ref": "RetainEvaluateS3"
-                    },
+                    },                   
                     "S3Bucket": {
                         "Ref": "S3Bucket"
                     },

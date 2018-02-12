@@ -51,8 +51,7 @@
                     "Label": {
                         "default": "S3 Configuration"
                     },
-                    "Parameters": [
-                        "RetainEvaluateS3",
+                    "Parameters": [                       
                         "S3EvaluateBucket"
                     ]
                 },
@@ -164,10 +163,7 @@
                 },
                 "RDPFrom": {
                     "default": "RDP From"
-                },
-                "RetainEvaluateS3": {
-                    "default": "Retain Evaluate S3"
-                },
+                },              
                 "S3Bucket": {
                     "default": "S3 Bucket"
                 },
@@ -406,16 +402,6 @@
             "Description": "Lockdown RDP access to EC2 instance from valid IPv4 address, e.g. 201.0.1.3/19",
             "Type": "String"
         },
-        "RetainEvaluateS3": {
-            "AllowedValues": [
-                "Yes",
-                "No"
-            ],
-            "ConstraintDescription": "must specify Yes or No.",
-            "Default": "No",
-            "Description": "After you have deleted this Stack, do you want to retain or delete the Evaluate S3 where all your Evaluation Attachments are stored?",
-            "Type": "String"
-        },
         "S3Bucket": {
             "AllowedPattern": "^[a-z0-9]+([0-9a-zA-Z-.]*[0-9a-z])*$",
             "ConstraintDescription": "Must not be empty, must begin with a letter or number and contain only alphanumeric, lowercase characters, must not end with . or -, no longer than 63 characters in length",
@@ -534,9 +520,6 @@
                 "Parameters": {
                     "KeyName": {
                         "Ref": "KeyPairName"
-                    },
-                    "RetainEvaluateS3": {
-                        "Ref": "RetainEvaluateS3"
                     },
                     "RDPFrom": {
                         "Ref": "RDPFrom"
