@@ -13,7 +13,9 @@
                         "InstanceType",
                         "VPCID",
                         "SubnetID",
-                        "RDPFrom"
+                        "ElasticIp",
+                        "WebXface",
+                        "RDPFrom"                        
                     ]
                 },
                 {
@@ -26,7 +28,7 @@
                         "DBEvaluateUser",
                         "DBEvaluatePassword"
                     ]
-                },
+                },                        
                 {
                     "Label": {
                         "default": "S3 Configuration"
@@ -46,7 +48,32 @@
                         "DomainAdminPassword",
                         "DomainNetBiosName"
                     ]
-                }
+                },
+                {
+                    "Label": {
+                        "default": "Amazon Connect Configuration"
+                    },
+                    "Parameters": [
+                        "S3Bucket"                      
+                    ]
+                },     
+                {
+                    "Label": {
+                        "default": "ElasticSearch Configuration"
+                    },
+                    "Parameters": [
+                        "ESDomain"
+                    ]
+                },                                
+                {
+                    "Label": {
+                        "default": "AWS Quick Start Configuration"
+                    },
+                    "Parameters": [
+                        "QSS3BucketName",
+                        "QSS3KeyPrefix"
+                    ]
+                }                
             ],
             "ParameterLabels": {
                 "DBAdminPassword": {
@@ -73,6 +100,12 @@
                 "DomainIPs": {
                     "default": "Domain IPs"
                 },
+                "DomainNetBiosName": {
+                    "default": "Domain NetBios Name"
+                },                
+                "ElasticIp" : {
+                    "default": "Elastic IP"
+                },
                 "ESDomain": {
                     "default": "ES Domain"
                 },
@@ -82,14 +115,29 @@
                 "KeyName": {
                     "default": "Key Name"
                 },
+                "QSS3BucketName": {
+                    "default": "QS S3 BucketName"
+                },
+                "QSS3KeyPrefix": {
+                    "default": "QS S3 Key Prefix"
+                },                
                 "RDPFrom": {
                     "default": "RDP From"
+                },
+                "S3Bucket": {
+                    "default": "S3 Bucket"
                 },
                 "S3EvaluateBucket": {
                     "default": "S3 Evaluate Bucket"
                 },
+                "SubnetID": {
+                    "default": "Subnet ID"
+                },                
                 "VPCID": {
                     "default": "VPC ID"
+                },
+                "WebXface" : {
+                    "default" : "Web Interface"
                 }
             }
         }
@@ -159,10 +207,12 @@
             "Type": "String"
         },
         "ESDomain": {
-            "Type": "String"
+            "Type": "String",
+            "Description": "This is the name for the ElasticSearch Domain"
         },
         "ElasticIp": {
-            "Type": "String"
+            "Type": "String",
+            "Description" : "Elastic IP of EC2 Instance"
         },
         "InstanceType": {
             "AllowedValues": [
@@ -226,9 +276,17 @@
             "Type": "AWS::EC2::KeyPair::KeyName"
         },
         "QSS3BucketName": {
+            "AllowedPattern": "^[0-9a-zA-Z]+([0-9a-zA-Z-]*[0-9a-zA-Z])*$",
+            "ConstraintDescription": "Quick Start bucket name can include numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen (-)",
+            "Default": "quickstart-reference",
+            "Description": "S3 bucket name for the Quick Start assets. This string can include numbers, lowercase letters, uppercase letters, and hyphens (-). It cannot start or end with a hyphen (-)",
             "Type": "String"
         },
         "QSS3KeyPrefix": {
+            "AllowedPattern": "^[0-9a-zA-Z-/]*$",
+            "ConstraintDescription": "Quick Start key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slash (/)",
+            "Default": "connect/integration/qualtrak/evaluate/latest/",
+            "Description": "S3 key prefix for the Quick Start assets. Quick Start key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slash (/)",
             "Type": "String"
         },
         "RDPFrom": {
@@ -262,7 +320,8 @@
             "Type": "AWS::EC2::VPC::Id"
         },
         "WebXface": {
-            "Type": "String"
+            "Type": "String",
+            "Description" : "Interface for web traffic"
         }
     },
     "Rules": {
