@@ -31,7 +31,7 @@
                     "Label": {
                         "default": "S3 Configuration"
                     },
-                    "Parameters": [                       
+                    "Parameters": [
                         "S3EvaluateBucket"
                     ]
                 },
@@ -129,7 +129,7 @@
                 },
                 "RDPFrom": {
                     "default": "RDP From"
-                },               
+                },
                 "S3Bucket": {
                     "default": "S3 Bucket"
                 },
@@ -454,7 +454,7 @@
                 "Parameters": {
                     "KeyName": {
                         "Ref": "KeyName"
-                    },                    
+                    },
                     "RDPFrom": {
                         "Ref": "RDPFrom"
                     },

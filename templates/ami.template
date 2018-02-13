@@ -15,7 +15,7 @@
                         "SubnetID",
                         "ElasticIp",
                         "WebXface",
-                        "RDPFrom"                        
+                        "RDPFrom"
                     ]
                 },
                 {
@@ -28,7 +28,7 @@
                         "DBEvaluateUser",
                         "DBEvaluatePassword"
                     ]
-                },                        
+                },
                 {
                     "Label": {
                         "default": "S3 Configuration"
@@ -54,9 +54,9 @@
                         "default": "Amazon Connect Configuration"
                     },
                     "Parameters": [
-                        "S3Bucket"                      
+                        "S3Bucket"
                     ]
-                },     
+                },
                 {
                     "Label": {
                         "default": "ElasticSearch Configuration"
@@ -64,7 +64,7 @@
                     "Parameters": [
                         "ESDomain"
                     ]
-                },                                
+                },
                 {
                     "Label": {
                         "default": "AWS Quick Start Configuration"
@@ -73,7 +73,7 @@
                         "QSS3BucketName",
                         "QSS3KeyPrefix"
                     ]
-                }                
+                }
             ],
             "ParameterLabels": {
                 "DBAdminPassword": {
@@ -102,8 +102,8 @@
                 },
                 "DomainNetBiosName": {
                     "default": "Domain NetBios Name"
-                },                
-                "ElasticIp" : {
+                },
+                "ElasticIp": {
                     "default": "Elastic IP"
                 },
                 "ESDomain": {
@@ -120,7 +120,7 @@
                 },
                 "QSS3KeyPrefix": {
                     "default": "QS S3 Key Prefix"
-                },                
+                },
                 "RDPFrom": {
                     "default": "RDP From"
                 },
@@ -132,12 +132,12 @@
                 },
                 "SubnetID": {
                     "default": "Subnet ID"
-                },                
+                },
                 "VPCID": {
                     "default": "VPC ID"
                 },
-                "WebXface" : {
-                    "default" : "Web Interface"
+                "WebXface": {
+                    "default": "Web Interface"
                 }
             }
         }
@@ -212,7 +212,7 @@
         },
         "ElasticIp": {
             "Type": "String",
-            "Description" : "Elastic IP of EC2 Instance"
+            "Description": "Elastic IP of EC2 Instance"
         },
         "InstanceType": {
             "AllowedValues": [
@@ -321,7 +321,7 @@
         },
         "WebXface": {
             "Type": "String",
-            "Description" : "Interface for web traffic"
+            "Description": "Interface for web traffic"
         }
     },
     "Rules": {
