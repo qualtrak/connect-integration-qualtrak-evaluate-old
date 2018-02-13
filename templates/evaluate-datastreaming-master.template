@@ -582,7 +582,7 @@
                         "Ref": "QSS3BucketName"
                     },
                     "QSS3KeyPrefix": {
-                        "Ref": "QSS3KeyPrefix"
+                        "Fn::Sub": "${QSS3KeyPrefix}submodules/connect-integration-datastreaming/"
                     },
                     "VPCID": {
                         "Fn::GetAtt": "VPCStack.Outputs.VPCID"
