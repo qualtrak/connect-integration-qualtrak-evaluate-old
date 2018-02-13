@@ -1,12 +1,12 @@
 {
     "AWSTemplateFormatVersion": "2010-09-09",
-    "Description": "This template creates the appropriate resources that are required by the EC2 instance",
+    "Description": "This template creates the appropriate resources that are required by the EC2 instance (qs-1o61c3c8o)",
     "Metadata": {
         "AWS::CloudFormation::Interface": {
             "ParameterGroups": [
                 {
                     "Label": {
-                        "default": "Network Configuration"
+                        "default": "Amazon VPC Configuration"
                     },
                     "Parameters": [
                         "VPCID",

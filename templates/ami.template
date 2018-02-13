@@ -1,6 +1,6 @@
 {
     "AWSTemplateFormatVersion": "2010-09-09",
-    "Description": "This template creates an EC2 instance, an MSSQL Express Edition RDS instance and an S3 Bucket",
+    "Description": "This template creates an EC2 instance, an MSSQL Express Edition RDS instance and an S3 Bucket (qs-1o61c3c8t)",
     "Metadata": {
         "AWS::CloudFormation::Interface": {
             "ParameterGroups": [

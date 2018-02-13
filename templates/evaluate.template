@@ -1,12 +1,12 @@
 {
     "AWSTemplateFormatVersion": "2010-09-09",
-    "Description": "This workload template creates an infrastructure for Evaluate for Amazon Connect on AWS. **WARNING** This template creates EC2 instances and related resources. You will be billed for the AWS resources used if you create a stack from this template.",
+    "Description": "This workload template creates an infrastructure for Evaluate for Amazon Connect on AWS. **WARNING** This template creates EC2 instances and related resources. You will be billed for the AWS resources used if you create a stack from this template. (qs-1o61c3c8e)",
     "Metadata": {
         "AWS::CloudFormation::Interface": {
             "ParameterGroups": [
                 {
                     "Label": {
-                        "default": "EC2 Configuration"
+                        "default": "Amazon EC2 Configuration"
                     },
                     "Parameters": [
                         "InstanceType",
@@ -29,7 +29,7 @@
                 },
                 {
                     "Label": {
-                        "default": "S3 Configuration"
+                        "default": "Amazon S3 Configuration"
                     },
                     "Parameters": [
                         "S3EvaluateBucket"
@@ -37,7 +37,7 @@
                 },
                 {
                     "Label": {
-                        "default": "Active Directory Domain Configuration"
+                        "default": "Microsoft Active Directory Configuration"
                     },
                     "Parameters": [
                         "DomainDNSName",
@@ -58,7 +58,7 @@
                 },
                 {
                     "Label": {
-                        "default": "ElasticSearch Configuration"
+                        "default": "Amazon ElasticSearch Configuration"
                     },
                     "Parameters": [
                         "ESDomain",
