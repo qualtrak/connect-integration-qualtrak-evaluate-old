@@ -316,7 +316,7 @@
             "Type": "AWS::EC2::Subnet::Id"
         },
         "VPCID": {
-            "Description": "VPC ID",
+            "Description": "ID of your existing VPC for deployment",
             "Type": "AWS::EC2::VPC::Id"
         },
         "WebXface": {
