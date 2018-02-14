@@ -6,7 +6,7 @@
             "ParameterGroups": [
                 {
                     "Label": {
-                        "default": "EC2 Configuration"
+                        "default": "Amazon EC2 Configuration"
                     },
                     "Parameters": [
                         "KeyName",
@@ -31,7 +31,7 @@
                 },
                 {
                     "Label": {
-                        "default": "S3 Configuration"
+                        "default": "Amazon S3 Configuration"
                     },
                     "Parameters": [
                         "S3EvaluateBucket"
@@ -39,7 +39,7 @@
                 },
                 {
                     "Label": {
-                        "default": "Active Directory Configuration"
+                        "default": "Microsoft Active Directory Configuration"
                     },
                     "Parameters": [
                         "DomainDNSName",
@@ -59,7 +59,7 @@
                 },
                 {
                     "Label": {
-                        "default": "ElasticSearch Configuration"
+                        "default": "Amazon ElasticSearch Configuration"
                     },
                     "Parameters": [
                         "ESDomain"
