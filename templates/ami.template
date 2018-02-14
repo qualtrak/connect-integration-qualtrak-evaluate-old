@@ -20,7 +20,7 @@
                 },
                 {
                     "Label": {
-                        "default": "Amazon Amazon RDS Configuration"
+                        "default": "Amazon RDS Configuration"
                     },
                     "Parameters": [
                         "DBAdminUser",
