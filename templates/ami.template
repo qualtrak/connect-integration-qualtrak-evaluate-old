@@ -6,7 +6,7 @@
             "ParameterGroups": [
                 {
                     "Label": {
-                        "default": "EC2 Configuration"
+                        "default": "Amazon EC2 Configuration"
                     },
                     "Parameters": [
                         "KeyName",
@@ -20,7 +20,7 @@
                 },
                 {
                     "Label": {
-                        "default": "Amazon RDS Configuration"
+                        "default": "Amazon Amazon RDS Configuration"
                     },
                     "Parameters": [
                         "DBAdminUser",
@@ -31,7 +31,7 @@
                 },
                 {
                     "Label": {
-                        "default": "S3 Configuration"
+                        "default": "Amazon S3 Configuration"
                     },
                     "Parameters": [
                         "S3EvaluateBucket"
@@ -39,7 +39,7 @@
                 },
                 {
                     "Label": {
-                        "default": "Active Directory Configuration"
+                        "default": "Microsoft Active Directory Configuration"
                     },
                     "Parameters": [
                         "DomainDNSName",
@@ -59,7 +59,7 @@
                 },
                 {
                     "Label": {
-                        "default": "ElasticSearch Configuration"
+                        "default": "Amazon ElasticSearch Configuration"
                     },
                     "Parameters": [
                         "ESDomain"
@@ -352,7 +352,7 @@
             },
             "eu-central-1": {
                 "WS2016R2V1": "ami-10e45d7f"
-            },
+            },  
             "ap-southeast-2": {
                 "WS2016R2V1": "ami-c503eea7"
             }
