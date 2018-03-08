@@ -320,18 +320,14 @@
             "Assertions": [
                 {
                     "Assert": {
-                        "Fn::Contains": [
-                            [
-                                "us-east-1",
-                                "eu-central-1",
-                                "ap-southeast-2"
-                            ],
+                        "Fn::Equals": [
                             {
                                 "Ref": "AWS::Region"
-                            }
+                            },
+                            "us-east-1"
                         ]
                     },
-                    "AssertDescription": "Region must be in either US East (N. Virginia), EU (Frankfurt) or Asia Pacific (Sydney)"
+                    "AssertDescription": "Region must be US East (N. Virginia) - us-east-1"
                 }
             ]
         }
