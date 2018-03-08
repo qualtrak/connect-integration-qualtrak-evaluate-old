@@ -362,15 +362,15 @@
         },
         "KeyPairName": {
             "ConstraintDescription": "You must provide a key pair",
-            "Description": "Select the name of an existing public/private key pair. Please go to the EC2 console and create a key pair if you do not have one",
+            "Description": "Name of an existing EC2 key pair. All instances will launch with this key pair.",
             "Type": "AWS::EC2::KeyPair::KeyName"
         },
         "PrivateSubnetID": {
-            "Description": "Select at least one private subnet",
+            "Description": "ID of private subnet in an Availability Zone (e.g., subnet-a0246dcd)",
             "Type": "List<AWS::EC2::Subnet::Id>"
         },
         "PublicSubnetID": {
-            "Description": "Select at least one public subnet",
+            "Description": "ID of public subnet in an Availability Zone (e.g., subnet-9bc642ac)",
             "Type": "List<AWS::EC2::Subnet::Id>"
         },
         "QSS3BucketName": {
@@ -413,7 +413,7 @@
             "Type": "AWS::EC2::Subnet::Id"
         },
         "VPCID": {
-            "Description": "VPC ID",
+            "Description": "ID of your existing VPC for deployment",
             "Type": "AWS::EC2::VPC::Id"
         }
     },
