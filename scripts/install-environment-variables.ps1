@@ -1,31 +1,31 @@
 [CmdletBinding()]
 param (
     [Parameter(Mandatory=$true)]
-    [string[]]$bucket,
+    [string]$bucket,
     [Parameter(Mandatory=$true)]
-    [string[]]$attachmentBucket,
+    [string]$attachmentBucket,
     [Parameter(Mandatory=$true)]
-    [string[]]$dns,
+    [string]$dns,
     [Parameter(Mandatory=$true)]
-    [string[]]$dbAdminUser,
+    [string]$dbAdminUser,
     [Parameter(Mandatory=$true)]
-    [string[]]$dbAdminPassword,
+    [string]$dbAdminPassword,
     [Parameter(Mandatory=$true)]
-    [string[]]$dbUser,
+    [string]$dbUser,
     [Parameter(Mandatory=$true)]
-    [string[]]$dbUserPassword,
+    [string]$dbUserPassword,
     [Parameter(Mandatory=$true)]
-    [string[]]$dbDns,
+    [string]$dbDns,
     [Parameter(Mandatory=$true)]
-    [string[]]$dbPort,
+    [string]$dbPort,
     [Parameter(Mandatory=$true)]
-    [string[]]$accountId,
+    [string]$accountId,
     [Parameter(Mandatory=$true)]
-    [string[]]$region,
+    [string]$region,
     [Parameter(Mandatory=$true)]
-    [string[]]$adDomain,
+    [string]$adDomain,
     [Parameter(Mandatory=$true)]
-    [string[]]$esUrl
+    [string]$esUrl
     
 )
 
