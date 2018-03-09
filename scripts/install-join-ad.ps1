@@ -1,15 +1,15 @@
 [CmdletBinding()]
 param (
     [Parameter(Mandatory=$true)]
-    [string[]]$ip1,
+    [string$ip1,
     [Parameter(Mandatory=$true)]
-    [string[]]$ip2,
+    [string]$ip2,
     [Parameter(Mandatory=$true)]
-    [string[]]$adDomain,
+    [string]$adDomain,
     [Parameter(Mandatory=$true)]
-    [string[]]$adAdminUser,
+    [string]$adAdminUser,
     [Parameter(Mandatory=$true)]
-    [string[]]$adAdminPassword
+    [string]$adAdminPassword
 )
 
 ### Join the domain
