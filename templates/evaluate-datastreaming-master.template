@@ -647,7 +647,17 @@
                         "Ref": "S3EvaluateBucket"
                     },
                     "SubnetID": {
-                        "Fn::GetAtt": "VPCStack.Outputs.PublicSubnet1ID"
+                        "Fn::Join": [
+                            ",",
+                            [
+                                {
+                                    "Fn::GetAtt": "VPCStack.Outputs.PublicSubnet1ID"
+                                },
+                                {
+                                    "Fn::GetAtt": "VPCStack.Outputs.PublicSubnet2ID"
+                                }
+                            ]
+                        ]
                     },
                     "VPCID": {
                         "Fn::GetAtt": "VPCStack.Outputs.VPCID"

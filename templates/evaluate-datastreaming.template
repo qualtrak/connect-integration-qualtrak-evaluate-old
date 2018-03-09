@@ -32,8 +32,7 @@
                     },
                     "Parameters": [
                         "InstanceType",
-                        "RDPFrom",
-                        "SubnetID"
+                        "RDPFrom"
                     ]
                 },
                 {
@@ -169,9 +168,6 @@
                 },
                 "S3EvaluateBucket": {
                     "default": "S3 Evaluate Bucket"
-                },
-                "SubnetID": {
-                    "default": "Subnet ID"
                 },
                 "VPCID": {
                     "default": "VPC ID"
@@ -408,10 +404,6 @@
             "MinLength": "3",
             "Type": "String"
         },
-        "SubnetID": {
-            "Description": "Subnet ID, must be same CIDR that was supplied when ElasticSearch was deployed",
-            "Type": "AWS::EC2::Subnet::Id"
-        },
         "VPCID": {
             "Description": "ID of your existing VPC for deployment",
             "Type": "AWS::EC2::VPC::Id"
@@ -543,7 +535,12 @@
                         "Ref": "VPCID"
                     },
                     "SubnetID": {
-                        "Ref": "SubnetID"
+                        "Fn::Join": [
+                            ",",
+                            {
+                                "Ref": "PublicSubnetID"
+                            }
+                        ]
                     },
                     "DBAdminUser": {
                         "Ref": "DBAdminUser"

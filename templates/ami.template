@@ -15,7 +15,8 @@
                         "SubnetID",
                         "ElasticIp",
                         "WebXface",
-                        "RDPFrom"
+                        "RDPFrom",
+                        "PrivateIp"
                     ]
                 },
                 {
@@ -132,6 +133,9 @@
                 },
                 "SubnetID": {
                     "default": "Subnet ID"
+                },                
+                "PrivateIp": {
+                    "default": "Private IP"
                 },
                 "VPCID": {
                     "default": "VPC ID"
@@ -304,7 +308,7 @@
         },
         "SubnetID": {
             "Description": "Subnet ID, must be same CIDR that was supplied when ElasticSearch was deployed",
-            "Type": "AWS::EC2::Subnet::Id"
+            "Type": "List<AWS::EC2::Subnet::Id>"
         },
         "VPCID": {
             "Description": "ID of your existing VPC for deployment",
@@ -313,6 +317,10 @@
         "WebXface": {
             "Type": "String",
             "Description": "Interface for web traffic"
+        },
+        "PrivateIp": {
+            "Type": "String",
+            "Description": "Private IP address to be allowed access to RDS"
         }
     },
     "Rules": {
@@ -346,6 +354,32 @@
         }
     },
     "Resources": {
+        "InstanceSecurityGroup": {
+            "Type": "AWS::EC2::SecurityGroup",
+            "Properties": {
+                "GroupDescription": "Allow access from EC2 instance",
+                "VpcId": {"Ref": "VPCID"},
+                "SecurityGroupIngress": [{
+                    "IpProtocol": "tcp",
+                    "FromPort": "1433",
+                    "ToPort": "1433",
+                    "CidrIp": {"Fn::Sub": "${PrivateIp}/32"}
+                }],
+                "SecurityGroupEgress" : [{
+                    "IpProtocol": "tcp",
+                    "FromPort": "0",
+                    "ToPort": "0",
+                    "CidrIp": "0.0.0.0/0"
+                }]
+            }
+        },
+        "MyDBSubnetGroup": {
+            "Type": "AWS::RDS::DBSubnetGroup",
+            "Properties": {
+                "DBSubnetGroupDescription": "description",
+                "SubnetIds": {"Ref": "SubnetID"} 
+            }
+        },
         "SqlExpress": {
             "Type": "AWS::RDS::DBInstance",
             "DeletionPolicy": "Snapshot",
@@ -353,7 +387,7 @@
                 "AllocatedStorage": "100",
                 "DBInstanceClass": "db.t2.medium",
                 "Engine": "sqlserver-ex",
-                "EngineVersion" : "13.00.4466.4.v1",
+                "EngineVersion": "13.00.4466.4.v1",
                 "Iops": "1000",
                 "MasterUsername": {
                     "Ref": "DBAdminUser"
@@ -361,7 +395,13 @@
                 "MasterUserPassword": {
                     "Ref": "DBAdminPassword"
                 },
-                "BackupRetentionPeriod": "0"
+                "BackupRetentionPeriod": "0",
+                "DBSubnetGroupName": {
+                    "Ref": "MyDBSubnetGroup"
+                },
+                "VPCSecurityGroups": [{
+                    "Ref": "InstanceSecurityGroup"
+                }]
             }
         },
         "RootRole": {

@@ -122,6 +122,14 @@
             "Value": {
                 "Ref": "WebXface"
             }
+        },
+        "PrivateIp": {
+            "Value": {
+                "Fn::GetAtt": [
+                    "WebXface",
+                    "PrimaryPrivateIpAddress"
+                ]
+            }
         }
     }
 }

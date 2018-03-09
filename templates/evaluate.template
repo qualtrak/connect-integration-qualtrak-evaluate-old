@@ -349,8 +349,8 @@
             "Type": "String"
         },
         "SubnetID": {
-            "Description": "Subnet ID, must be same CIDR that was supplied when ElasticSearch was deployed",
-            "Type": "AWS::EC2::Subnet::Id"
+            "Description": "Must select 2 or more. 1st is required by EC2 instance. All are required by RDS Subnet Group",
+            "Type": "List<AWS::EC2::Subnet::Id>"
         },
         "VPCID": {
             "Description": "ID of your existing VPC for deployment",
@@ -389,7 +389,7 @@
                         "Ref": "VPCID"
                     },
                     "SubnetID": {
-                        "Ref": "SubnetID"
+                        "Fn::Select": ["0", {"Ref": "SubnetID"}]
                     }
                 }
             }
@@ -473,7 +473,12 @@
                         "Ref": "VPCID"
                     },
                     "SubnetID": {
-                        "Ref": "SubnetID"
+                        "Fn::Join": [
+                            ",",
+                            {
+                                "Ref": "SubnetID"
+                            }
+                        ]
                     },
                     "DBAdminUser": {
                         "Ref": "DBAdminUser"
@@ -500,6 +505,12 @@
                         "Fn::GetAtt": [
                             "AMISecurityStack",
                             "Outputs.WebXFace"
+                        ]
+                    },
+                    "PrivateIp": {
+                        "Fn::GetAtt": [
+                            "AMISecurityStack",
+                            "Outputs.PrivateIp"
                         ]
                     },
                     "ElasticIp": {
