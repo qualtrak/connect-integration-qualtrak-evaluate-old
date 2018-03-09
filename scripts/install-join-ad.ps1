@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param (
     [Parameter(Mandatory=$true)]
-    [string$ip1,
+    [string]$ip1,
     [Parameter(Mandatory=$true)]
     [string]$ip2,
     [Parameter(Mandatory=$true)]

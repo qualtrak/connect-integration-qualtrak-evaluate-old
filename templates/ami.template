@@ -353,6 +353,7 @@
                 "AllocatedStorage": "100",
                 "DBInstanceClass": "db.t2.medium",
                 "Engine": "sqlserver-ex",
+                "EngineVersion" : "13.00.4466.4.v1",
                 "Iops": "1000",
                 "MasterUsername": {
                     "Ref": "DBAdminUser"
