@@ -485,6 +485,13 @@
                                             "Fn::Sub": "arn:aws:es:${AWS::Region}:${AWS::AccountId}:domain/${ESDomain}/*"
                                         }
                                     ]
+                                },
+                                {
+                                    "Action": [
+                                        "aws-marketplace:MeterUsage"
+                                    ],
+                                    "Effect": "Allow",
+                                    "Resource": "*"
                                 }
                             ]
                         }
